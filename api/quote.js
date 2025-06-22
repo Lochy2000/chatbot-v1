@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   }
 
   try {
-        const modelName = "gemini-2.5-pro"; // or "gemini-2.5-flash"
+        const modelName = "gemini-pro"; // or "gemini-1.5-flash-latest"
         const result = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${GEMINI_API_KEY}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
