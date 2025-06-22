@@ -1,5 +1,3 @@
-// File: /api/quote.js
-
 export default async function handler(req, res) {
   const prompt = req.query.prompt;
   const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -13,13 +11,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const result = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }]
-      })
-    });
+        const modelName = "gemini-2.5-pro"; // or "gemini-2.5-flash"
+        const result = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${GEMINI_API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
 
     const data = await result.json();
     const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini.";
