@@ -11,15 +11,35 @@ export default async function handler(req, res) {
   }
 
   try {
-        const modelName = "gemini-pro"; // or "gemini-1.5-flash-latest"
-        const result = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${GEMINI_API_KEY}`, {
+    const modelName = "gemini-pro"; // or "gemini-1.5-flash-latest"
+    const result = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${GEMINI_API_KEY}`,
+      {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+      }
+    );
 
     const data = await result.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response from Gemini.";
+
+    if (!result.ok) {
+      const errorMessage =
+        data.error?.message || "Gemini API request failed.";
+      console.error(
+        `Gemini API error ${result.status}: ${errorMessage}`
+      );
+
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+      return res.status(result.status).json({ error: errorMessage });
+    }
+
+    const reply =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "No response from Gemini.";
 
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST");
@@ -27,6 +47,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ reply });
   } catch (err) {
+    console.error(`Gemini API request failed: ${err.message}`);
     res.status(500).json({ error: "Gemini API request failed." });
   }
 }
