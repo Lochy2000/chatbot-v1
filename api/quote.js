@@ -1,3 +1,5 @@
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-1.5-pro";
+
 export default async function handler(req, res) {
   const prompt = req.query.prompt;
   const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -11,9 +13,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const modelName = process.env.GEMINI_MODEL || "gemini-1.5-pro";
     const result = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

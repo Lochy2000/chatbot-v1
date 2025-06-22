@@ -28,7 +28,8 @@ To run the API you need to provide a `GEMINI_API_KEY` environment variable.
 1. Create a new project on Vercel and link it to this repository.
 2. In the Vercel dashboard, open **Settings** → **Environment Variables**.
 3. Add a variable named `GEMINI_API_KEY` with the same value used locally.
-4. Trigger a deployment—Vercel will provide the `GEMINI_API_KEY` to your API at build time.
+4. *(Optional)* Add a variable named `GEMINI_MODEL` to override the default model.
+5. Trigger a deployment—Vercel will provide these variables to your API at build time.
 
 ## Pushing to GitHub
 
