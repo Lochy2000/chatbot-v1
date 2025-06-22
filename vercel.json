@@ -4,5 +4,11 @@
     "api/quote.js": {
       "runtime": "nodejs18.x"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/api/quote",
+      "dest": "api/quote.js"
+    }
+  ]
 }
