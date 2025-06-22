@@ -2,7 +2,8 @@
 
 This project exposes a simple API endpoint for querying the Gemini API.
 
-The request is sent using the **gemini-pro** model (`api/quote.js`), which is the stable text model offered by the Gemini API.
+The request is sent using the **gemini-1.5-pro** model by default (`api/quote.js`).
+You can override this by setting a `GEMINI_MODEL` environment variable.
 
 To run the API you need to provide a `GEMINI_API_KEY` environment variable.
 
