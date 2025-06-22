@@ -3,7 +3,7 @@
 This project exposes a simple API endpoint for querying the Gemini API.
 
 The request is sent using the **gemini-1.5-pro** model by default (`api/quote.js`).
-You can override this by setting a `GEMINI_MODEL` environment variable.
+You can override this default by setting the `GEMINI_MODEL` environment variable.
 
 To run the API you need to provide a `GEMINI_API_KEY` environment variable.
 
@@ -15,7 +15,13 @@ To run the API you need to provide a `GEMINI_API_KEY` environment variable.
    GEMINI_API_KEY=<your key here>
    ```
 
-2. Start your local server with your preferred tool (`vercel dev`, `node`, etc.). The API will read `GEMINI_API_KEY` from the `.env` file.
+2. *(Optional)* Specify a different model by adding `GEMINI_MODEL`:
+
+   ```bash
+   GEMINI_MODEL=gemini-1.5-flash
+   ```
+
+3. Start your local server with your preferred tool (`vercel dev`, `node`, etc.). The API will read `GEMINI_API_KEY` and `GEMINI_MODEL` from the `.env` file.
 
 ## Deploying to Vercel
 
