@@ -13,6 +13,7 @@
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --purple-glow: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
             --dark-bg: #0a0a0f;
             --darker-bg: #050508;
             --text-primary: #ffffff;
@@ -448,6 +449,139 @@
             color: var(--text-muted);
         }
 
+        /* GitHub Button */
+        .github-button {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--purple-glow);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .github-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+            color: white;
+        }
+
+        .github-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Model Showcase Section */
+        .models-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            overflow: hidden;
+        }
+
+        .models-carousel {
+            margin: 3rem 0;
+            overflow: hidden;
+            mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
+        }
+
+        .models-track {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .model-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            font-weight: 500;
+            color: var(--text-primary);
+            min-width: 150px;
+            justify-content: center;
+        }
+
+        .model-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Enhanced Logo */
+        .logo img {
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 0 1rem;
@@ -482,10 +616,37 @@
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
+            
+            .github-button {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .github-button span {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- GitHub Button -->
+    <a href="https://github.com/Lochy2000/chatbot-v1" target="_blank" class="github-button">
+        <svg class="github-icon" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+        <span>View on GitHub</span>
+    </a>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-background">
@@ -497,11 +658,12 @@
         <div class="container">
             <header class="nav">
                 <div class="logo">
-                    <img src="assets/images/icons/robot.png" alt="Bot Playground" style="width: 32px; height: 32px;">
+                    <img src="assets/images/chaticon.png" alt="Bot Playground" style="width: 32px; height: 32px;">
                     <span class="logo-text">Bot Playground</span>
                 </div>
                 <nav class="nav-links">
                     <a href="#bots" class="nav-link">Explore Bots</a>
+                    <a href="#models" class="nav-link">AI Models</a>
                     <a href="icon-gallery.html" class="nav-link">Icon Gallery</a>
                     <a href="#about" class="nav-link">About</a>
                 </nav>
@@ -594,6 +756,127 @@
         </div>
     </section>
 
+    <!-- AI Models Showcase Section -->
+    <section id="models" class="models-section">
+        <div class="container">
+            <h2 class="section-title">Powered by 11 AI Models</h2>
+            <p class="section-subtitle">Choose from the latest free models including Llama 4, DeepSeek R1, Gemini 2.5 Pro, and more</p>
+            
+            <div class="models-carousel">
+                <div class="models-track">
+                    <!-- First set -->
+                    <div class="model-badge">
+                        <div class="model-icon">🔥</div>
+                        <span>Gemini 1.5 Flash</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">⚡</div>
+                        <span>Gemini 1.5 Pro</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🦙</div>
+                        <span>Llama 4 Scout</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🚀</div>
+                        <span>Llama 4 Maverick</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🧠</div>
+                        <span>DeepSeek V3</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">💭</div>
+                        <span>DeepSeek R1</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🔬</div>
+                        <span>Gemini 2.5 Pro Exp</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">⭐</div>
+                        <span>MiniMax M1</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">📚</div>
+                        <span>MiniMax M1 Extended</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🇫🇷</div>
+                        <span>Mistral Small</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">👁️</div>
+                        <span>Kimi VL Thinking</span>
+                    </div>
+                    <!-- Duplicate set for seamless scroll -->
+                    <div class="model-badge">
+                        <div class="model-icon">🔥</div>
+                        <span>Gemini 1.5 Flash</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">⚡</div>
+                        <span>Gemini 1.5 Pro</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🦙</div>
+                        <span>Llama 4 Scout</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🚀</div>
+                        <span>Llama 4 Maverick</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🧠</div>
+                        <span>DeepSeek V3</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">💭</div>
+                        <span>DeepSeek R1</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🔬</div>
+                        <span>Gemini 2.5 Pro Exp</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">⭐</div>
+                        <span>MiniMax M1</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">📚</div>
+                        <span>MiniMax M1 Extended</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">🇫🇷</div>
+                        <span>Mistral Small</span>
+                    </div>
+                    <div class="model-badge">
+                        <div class="model-icon">👁️</div>
+                        <span>Kimi VL Thinking</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">11</div>
+                        <div class="stat-label">AI Models</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Specialized Bots</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Free to Use</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
@@ -659,10 +942,10 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <div class="logo">
-                        <img src="assets/images/icons/robot.png" alt="Bot Playground" style="width: 32px; height: 32px;">
+                        <img src="assets/images/chaticon.png" alt="Bot Playground" style="width: 32px; height: 32px;">
                         <span class="logo-text">Bot Playground</span>
                     </div>
-                    <p>Explore different approaches to conversational AI</p>
+                    <p>Explore different approaches to conversational AI with 11 free models</p>
                 </div>
                 <div class="footer-links">
                     <div class="link-group">
@@ -675,13 +958,20 @@
                     <div class="link-group">
                         <h4>About</h4>
                         <a href="#about">The Project</a>
-                        <a href="#technology">Technology</a>
-                        <a href="https://www.linkedin.com/company/easywebsuk/">Contact</a>
+                        <a href="https://github.com/Lochy2000/chatbot-v1">GitHub</a>
+                        <a href="https://openrouter.ai">OpenRouter</a>
+                        <a href="https://vercel.com">Vercel</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Resources</h4>
+                        <a href="#models">AI Models</a>
+                        <a href="icon-gallery.html">Icon Gallery</a>
+                        <a href="https://gemini.google.com">Gemini AI</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Bot Playground. An exploration of specialized AI chatbots.</p>
+                <p>&copy; 2025 Bot Playground. Powered by 11 free AI models including Llama 4, DeepSeek R1, and Gemini 2.5 Pro.</p>
             </div>
         </div>
     </footer>
@@ -691,6 +981,7 @@
             initializeAnimations();
             initializeNavigation();
             initializeBotCards();
+            initializeModelCarousel();
         });
 
         function initializeAnimations() {
@@ -767,6 +1058,29 @@
                             window.location.href = link.href;
                         }
                     }
+                });
+            });
+        }
+
+        function initializeModelCarousel() {
+            // Pause animation on hover
+            const modelsTrack = document.querySelector('.models-track');
+            if (modelsTrack) {
+                modelsTrack.addEventListener('mouseenter', () => {
+                    modelsTrack.style.animationPlayState = 'paused';
+                });
+                
+                modelsTrack.addEventListener('mouseleave', () => {
+                    modelsTrack.style.animationPlayState = 'running';
+                });
+            }
+            
+            // Add click tracking for model badges
+            const modelBadges = document.querySelectorAll('.model-badge');
+            modelBadges.forEach(badge => {
+                badge.addEventListener('click', () => {
+                    console.log('Model clicked:', badge.textContent.trim());
+                    // Could add analytics or navigation here
                 });
             });
         }
