@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Playground - Explore Different AI Chatbots</title>
+    <title>Bot Playground - 11 Free AI Models | Llama 4, DeepSeek R1, Gemini 2.5 Pro</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/icons.css" rel="stylesheet">
     <style>
@@ -196,11 +196,18 @@
             background: var(--primary-gradient);
             color: white;
             box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            animation: subtle-pulse 4s ease-in-out infinite;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+            animation: none;
+        }
+
+        @keyframes subtle-pulse {
+            0%, 100% { box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 8px 32px rgba(102, 126, 234, 0.5); }
         }
 
         .btn-secondary {
@@ -675,8 +682,8 @@
                     <span class="gradient-text">AI Chatbots</span>
                 </h1>
                 <p class="hero-subtitle">
-                    See how specialized chatbots work better than generic ones. 
-                    Test four different approaches to conversational AI.
+                    Experience how specialized chatbots work better than generic ones. 
+                    Test 4 different approaches with 11 cutting-edge AI models including Llama 4, DeepSeek R1, and Gemini 2.5 Pro.
                 </p>
                 <div class="hero-cta">
                     <a href="#bots" class="btn btn-primary">Try the Bots</a>
