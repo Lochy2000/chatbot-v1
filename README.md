@@ -1,7 +1,7 @@
 
 ![image](https://github.com/user-attachments/assets/c12194ce-b0cc-44af-900f-421c294b20ad)
 
-# 🤖 Bot Playground
+# Bot Playground
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=vercel)](https://your-deployed-url.vercel.app)
 [![Node.js](https://img.shields.io/badge/Node.js-18.x-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
@@ -11,7 +11,7 @@
 
 > **An interactive demonstration site showcasing different types of AI chatbots designed for specific use cases.**
 
-![Bot Playground Banner](public/assets/images/icons/robot.png)
+![chaticon](https://github.com/user-attachments/assets/a3af66a1-2740-4556-90b6-9e344ad2acb2)
 
 ---
 
