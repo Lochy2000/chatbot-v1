@@ -5,7 +5,18 @@
       "maxDuration": 30
     }
   },
-  "env": {
-    "GEMINI_API_KEY": "@gemini-api-key"
-  }
+  "rewrites": [
+    {
+      "source": "/assets/(.*)",
+      "destination": "/public/assets/$1"
+    },
+    {
+      "source": "/bots/(.*)",
+      "destination": "/public/bots/$1"
+    },
+    {
+      "source": "/icon-gallery.html",
+      "destination": "/public/icon-gallery.html"
+    }
+  ]
 }

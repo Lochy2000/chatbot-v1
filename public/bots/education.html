@@ -143,12 +143,13 @@
             align-items: flex-start;
             gap: 0.7rem;
             opacity: 0;
-            animation: messageSlideIn 0.4s ease-out forwards;
+            transform: translateY(10px);
+            transition: all 0.4s ease-out;
         }
 
-        @keyframes messageSlideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .msg.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .msg.user {
@@ -276,7 +277,13 @@
             gap: 0.7rem;
             margin-bottom: 1rem;
             opacity: 0;
-            animation: messageSlideIn 0.4s ease-out forwards;
+            transform: translateY(10px);
+            transition: all 0.4s ease-out;
+        }
+
+        .typing-indicator.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .typing-avatar {
@@ -387,7 +394,7 @@
 <body>
     <div class="education-bg"></div>
     
-    <a href="../../index.html" class="back-button">← Back to Playground</a>
+    <a href="../index.html" class="back-button">← Back to Playground</a>
     
     <div class="chat-container">
         <div class="header">
@@ -523,6 +530,11 @@
             msg.appendChild(content);
             chatBox.appendChild(msg);
             
+            // Trigger animation after element is in DOM
+            requestAnimationFrame(() => {
+                msg.classList.add('show');
+            });
+            
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
@@ -543,6 +555,12 @@
             `;
             
             chatBox.appendChild(typing);
+            
+            // Trigger animation after element is in DOM
+            requestAnimationFrame(() => {
+                typing.classList.add('show');
+            });
+            
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
@@ -676,7 +694,7 @@
         setTimeout(() => {
             const firstMessage = document.querySelector('.msg.bot');
             if (firstMessage) {
-                firstMessage.style.animation = 'messageSlideIn 0.6s ease-out';
+                firstMessage.classList.add('show');
             }
         }, 300);
     </script>

@@ -151,20 +151,20 @@
             
             <h3>In HTML:</h3>
             <div class="code-block">
-&lt;img src="/public/assets/images/icons/robot.png" alt="Robot" class="icon-medium"&gt;
+&lt;img src="assets/images/icons/robot.png" alt="Robot" class="icon-medium"&gt;
             </div>
             
             <h3>In CSS:</h3>
             <div class="code-block">
 .my-element {
-    background-image: url('/public/assets/images/icons/graduation.png');
+    background-image: url('assets/images/icons/graduation.png');
     background-size: 32px 32px;
 }
             </div>
             
             <h3>With Animation Classes:</h3>
             <div class="code-block">
-&lt;img src="/public/assets/images/icons/bluechat.png" class="icon-large icon-bounce"&gt;
+&lt;img src="assets/images/icons/bluechat.png" class="icon-large icon-bounce"&gt;
             </div>
             
             <h3>Available Size Classes:</h3>
@@ -222,7 +222,7 @@
             
             icons.forEach(iconFile => {
                 const iconName = iconFile.replace('.png', '').replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                const iconPath = `/public/assets/images/icons/${iconFile}`;
+                const iconPath = `assets/images/icons/${iconFile}`;
                 
                 const card = document.createElement('div');
                 card.className = 'icon-card';
