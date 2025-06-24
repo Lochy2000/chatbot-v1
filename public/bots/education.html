@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Guide - Bot Playground</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .education-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="35" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="45" cy="75" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="85" cy="65" r="1.2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 25s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-2px);
+        }
+
+        .chat-container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            width: 90%;
+            max-width: 450px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .header p {
+            margin: 0.5rem 0 0 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .rate-limit-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: #e8f2ff;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .token-badge {
+            background: #667eea;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .rate-status {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        #chat-box {
+            flex: 1;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1rem;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            border: 2px solid #e9ecef;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            scroll-behavior: smooth;
+        }
+
+        .msg {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            opacity: 0;
+            animation: messageSlideIn 0.4s ease-out forwards;
+        }
+
+        @keyframes messageSlideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .msg.user {
+            flex-direction: row-reverse;
+        }
+
+        .msg-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .msg.bot .msg-avatar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .msg.user .msg-avatar {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+        }
+
+        .msg-content {
+            background: white;
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 80%;
+            line-height: 1.5;
+            border: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .msg.user .msg-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+        }
+
+        .msg.bot .msg-content::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 12px;
+            border-right: 8px solid white;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .msg.user .msg-content::before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 12px;
+            border-left: 8px solid #667eea;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .formatted-list {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-area:focus-within {
+            border-color: #667eea;
+        }
+
+        #user-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.7rem;
+            font-size: 1rem;
+            background: transparent;
+            font-family: inherit;
+        }
+
+        #user-input::placeholder {
+            color: #999;
+        }
+
+        #send-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.7rem 1.2rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        #send-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        #send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: messageSlideIn 0.4s ease-out forwards;
+        }
+
+        .typing-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .typing-dots {
+            background: white;
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .typing-dots::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 12px;
+            border-right: 8px solid white;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+            animation: typing 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-10px); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                width: 95%;
+                height: 95vh;
+                padding: 1rem;
+            }
+
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .msg-content {
+                max-width: 85%;
+            }
+        }
+
+        /* Education-specific quick actions */
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9ff;
+            border-radius: 12px;
+            border: 1px solid #e8f2ff;
+        }
+
+        .quick-action {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 20px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+        }
+
+        .quick-action:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="education-bg"></div>
+    
+    <a href="../../index.html" class="back-button">← Back to Playground</a>
+    
+    <div class="chat-container">
+        <div class="header">
+            <h1><span>🎓</span> Academic Guide</h1>
+            <p>Your educational institution assistant</p>
+            <div class="rate-limit-info">
+                <span class="rate-status">Rate limiting enabled</span>
+                <span class="token-badge" id="token-badge">🔢 Tokens: 0</span>
+            </div>
+        </div>
+        
+        <div class="quick-actions">
+            <div class="quick-action" onclick="setQuickMessage('What courses do you offer in Computer Science?')">CS Courses</div>
+            <div class="quick-action" onclick="setQuickMessage('What are the admission requirements?')">Admissions</div>
+            <div class="quick-action" onclick="setQuickMessage('Tell me about campus life and facilities')">Campus Life</div>
+            <div class="quick-action" onclick="setQuickMessage('What financial aid options are available?')">Financial Aid</div>
+            <div class="quick-action" onclick="setQuickMessage('How do I apply for student housing?')">Housing</div>
+            <div class="quick-action" onclick="setQuickMessage('What support services do you provide?')">Support Services</div>
+        </div>
+        
+        <div id="chat-box">
+            <div class="msg bot">
+                <div class="msg-avatar">🎓</div>
+                <div class="msg-content">
+                    <strong>🎓 Welcome to Academic Guide!</strong><br><br>
+                    I'm here to help with all your educational questions including:
+                    <div class="formatted-list">
+                    <br>• Course information and requirements
+                    <br>• Admission processes and deadlines  
+                    <br>• Campus facilities and student life
+                    <br>• Financial aid and scholarships
+                    <br>• Academic support services
+                    </div>
+                    <br>What would you like to know about our institution?
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Ask about courses, admissions, campus life..." disabled>
+            <button id="send-btn" disabled>Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        
+        let messageCount = 0;
+        const MAX_MESSAGES = 10; // Rate limiting
+        
+        // Initialize the interface
+        setTimeout(() => {
+            userInput.disabled = false;
+            sendBtn.disabled = false;
+            userInput.focus();
+        }, 1000);
+
+        function setQuickMessage(message) {
+            userInput.value = message;
+            userInput.focus();
+        }
+
+        function send() {
+            const message = userInput.value.trim();
+            if (!message || userInput.disabled) return;
+            
+            // Rate limiting check
+            if (messageCount >= MAX_MESSAGES) {
+                showRateLimitMessage();
+                return;
+            }
+            
+            messageCount++;
+            updateRateStatus();
+            
+            addMessage(message, 'user');
+            userInput.value = '';
+            userInput.disabled = true;
+            sendBtn.disabled = true;
+            
+            showTyping();
+            
+            setTimeout(async () => {
+                try {
+                    const reply = await getEducationReply(message);
+                    hideTyping();
+                    addMessage(reply, 'bot');
+                } catch (error) {
+                    hideTyping();
+                    addMessage("⚠️ I'm having trouble connecting right now. Please try again in a moment!", 'bot');
+                } finally {
+                    userInput.disabled = false;
+                    sendBtn.disabled = false;
+                    userInput.focus();
+                }
+            }, 1500 + Math.random() * 1000);
+        }
+
+        function showRateLimitMessage() {
+            const limitMsg = `🚫 <strong>Rate Limit Reached</strong><br><br>You've reached the maximum of ${MAX_MESSAGES} messages for this demo session. This helps demonstrate rate limiting features that educational institutions often need.<br><br>Refresh the page to start a new session!`;
+            addMessage(limitMsg, 'bot');
+        }
+
+        function updateRateStatus() {
+            const rateStatus = document.querySelector('.rate-status');
+            const remaining = MAX_MESSAGES - messageCount;
+            rateStatus.textContent = `Rate limiting: ${remaining} messages remaining`;
+            
+            if (remaining <= 3) {
+                rateStatus.style.color = '#dc3545';
+                rateStatus.style.fontWeight = '600';
+            } else if (remaining <= 5) {
+                rateStatus.style.color = '#fd7e14';
+                rateStatus.style.fontWeight = '500';
+            }
+        }
+
+        function addMessage(text, sender) {
+            const msg = document.createElement('div');
+            msg.className = `msg ${sender}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'msg-avatar';
+            avatar.textContent = sender === 'bot' ? '🎓' : '👤';
+            
+            const content = document.createElement('div');
+            content.className = 'msg-content';
+            content.innerHTML = text;
+            
+            msg.appendChild(avatar);
+            msg.appendChild(content);
+            chatBox.appendChild(msg);
+            
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function showTyping() {
+            const typing = document.createElement('div');
+            typing.className = 'typing-indicator';
+            typing.id = 'typing';
+            
+            typing.innerHTML = `
+                <div class="typing-avatar">🎓</div>
+                <div class="typing-dots">
+                    <div class="dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            `;
+            
+            chatBox.appendChild(typing);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function hideTyping() {
+            const typing = document.getElementById('typing');
+            if (typing) typing.remove();
+        }
+
+        async function getEducationReply(userMessage) {
+            try {
+                // Check if we're running locally
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                
+                if (isLocal) {
+                    // Show local development message
+                    return `🔧 <strong>Local Development Mode</strong><br><br>The AI functionality requires deployment to work properly. For now, you can explore the interface and rate limiting features.<br><br>When deployed to Vercel, this bot will respond to: "${userMessage}" with intelligent academic guidance!`;
+                }
+
+                // Create education-specific prompt with formatting instructions
+                const educationPrompt = `You are EduGuide, a helpful educational institution assistant. 
+                You help students and prospective students with: course recommendations, admission requirements, 
+                campus life information, academic support, student services, and university guidance.
+                
+                IMPORTANT FORMATTING RULES:
+                - Use **text** for headings and important points
+                - Break information into bullet points using * for each point
+                - Keep responses organized with clear sections
+                - Use emojis appropriately for each section
+                - Limit responses to 4-5 key points maximum
+                - Make text scannable and easy to read
+                
+                Example format:
+                **🎓 Course Information**
+                * Point 1 with clear details
+                * Point 2 with helpful information
+                
+                **📋 Requirements**
+                * Requirement 1
+                * Requirement 2
+                
+                Student inquiry: ${userMessage}`;
+                
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: educationPrompt
+                    })
+                });
+                
+                const data = await res.json();
+                
+                if (data.error) {
+                    console.warn("Gemini error:", data.error);
+                    return `⚠️ <strong>Academic System Error:</strong> ${data.error}`;
+                }
+                
+                // Update token badge
+                const tokenBadge = document.getElementById("token-badge");
+                if (tokenBadge) {
+                    const tokenCount = data.tokens?.totalTokenCount || 0;
+                    tokenBadge.innerText = `🔢 Tokens: ${tokenCount}`;
+                }
+                
+                return formatEducationReply(data.reply);
+            } catch (e) {
+                console.error("Request failed:", e);
+                return "⚠️ This is a demo running locally. Deploy to Vercel for full AI functionality!";
+            }
+        }
+
+        function formatEducationReply(reply) {
+            let formatted = escapeHTML(reply);
+            
+            // Format bold headings (**text**)
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Format bullet points and add proper spacing
+            formatted = formatted.replace(/\* \*/g, '•');
+            formatted = formatted.replace(/\*([^*]+)\*/g, '<strong>$1</strong>');
+            
+            // Better line break handling
+            formatted = formatted.replace(/\n\n+/g, '<br><br>');
+            formatted = formatted.replace(/\n/g, '<br>');
+            
+            // Format bullet points with better spacing
+            formatted = formatted.replace(/• /g, '<br>• ');
+            formatted = formatted.replace(/^\s*<br>/, ''); // Remove leading break
+            
+            // Add spacing around headings
+            formatted = formatted.replace(/(<strong>[^<]*<\/strong>)/g, '<br><br>$1<br>');
+            
+            // Clean up multiple consecutive breaks
+            formatted = formatted.replace(/(<br>\s*){3,}/g, '<br><br>');
+            
+            // Add proper list formatting
+            formatted = formatted.replace(/(• [^<]*(?:<br>• [^<]*)*)/g, '<div class="formatted-list">$1</div>');
+            
+            return `🎓 ${formatted}`;
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[m]));
+        }
+
+        // Enter key functionality
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !userInput.disabled) {
+                send();
+            }
+        });
+
+        // Send button functionality
+        sendBtn.addEventListener('click', send);
+
+        // Smooth scrolling for chat box
+        chatBox.addEventListener('scroll', function() {
+            // Add subtle shadow when scrolled
+            if (chatBox.scrollTop > 0) {
+                chatBox.style.boxShadow = 'inset 0 8px 8px rgba(0,0,0,0.06), inset 0 2px 4px rgba(0,0,0,0.02)';
+            } else {
+                chatBox.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)';
+            }
+        });
+
+        // Initialize with a gentle welcome animation
+        setTimeout(() => {
+            const firstMessage = document.querySelector('.msg.bot');
+            if (firstMessage) {
+                firstMessage.style.animation = 'messageSlideIn 0.6s ease-out';
+            }
+        }, 300);
+    </script>
+</body>
+</html>

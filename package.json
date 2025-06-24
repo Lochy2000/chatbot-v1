@@ -1,8 +1,32 @@
 {
-  "name": "chatbot-v1",
+  "name": "bot-playground",
   "version": "1.0.0",
+  "description": "Interactive playground for testing different AI chatbot implementations",
   "type": "module",
   "engines": {
     "node": "18.x"
+  },
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "dev-node": "npx serve .",
+    "build": "echo 'No build step required'",
+    "start": "npx serve ."
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.2.1"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "keywords": [
+    "ai",
+    "chatbot",
+    "gemini",
+    "playground",
+    "conversational-ai"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "."
   }
 }

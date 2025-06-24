@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Playground - Icon Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="assets/css/icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(15px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #5a67d8;
+            transform: translateX(-2px);
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .icon-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .icon-card img {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .icon-name {
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-path {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: #6b7280;
+            word-break: break-all;
+            background: #f3f4f6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .usage-section {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .usage-section h2 {
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .icon-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-button">← Back to Playground</a>
+        
+        <h1>🎨 Icon Gallery</h1>
+        
+        <div class="icon-grid" id="iconGrid">
+            <!-- Icons will be populated by JavaScript -->
+        </div>
+        
+        <div class="usage-section">
+            <h2>💻 How to Use These Icons</h2>
+            
+            <h3>In HTML:</h3>
+            <div class="code-block">
+&lt;img src="/public/assets/images/icons/robot.png" alt="Robot" class="icon-medium"&gt;
+            </div>
+            
+            <h3>In CSS:</h3>
+            <div class="code-block">
+.my-element {
+    background-image: url('/public/assets/images/icons/graduation.png');
+    background-size: 32px 32px;
+}
+            </div>
+            
+            <h3>With Animation Classes:</h3>
+            <div class="code-block">
+&lt;img src="/public/assets/images/icons/bluechat.png" class="icon-large icon-bounce"&gt;
+            </div>
+            
+            <h3>Available Size Classes:</h3>
+            <ul>
+                <li><code>.icon-small</code> - 24x24px</li>
+                <li><code>.icon-medium</code> - 32x32px</li>
+                <li><code>.icon-large</code> - 48x48px</li>
+                <li><code>.icon-xl</code> - 64x64px</li>
+            </ul>
+            
+            <h3>Available Animation Classes:</h3>
+            <ul>
+                <li><code>.icon-bounce</code> - Gentle bounce effect</li>
+                <li><code>.icon-pulse</code> - Subtle scaling pulse</li>
+                <li><code>.icon-float</code> - Smooth floating motion</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Available icons in the project
+        const icons = [
+            'ai-chip.png',
+            'astronaut-helmet-icon-512.png',
+            'bank.png',
+            'beach-palmtrees.png',
+            'bluechat.png',
+            'bubble-effect.png',
+            'bullseye.png',
+            'cctv-camera.png',
+            'database-storage.png',
+            'diploma-cert.png',
+            'earth-globe.png',
+            'eco-lightbulb.png',
+            'fire.png',
+            'flask-lab-blue.png',
+            'flask-lab-red.png',
+            'graduation.png',
+            'graident-lightbulb.png',
+            'greenchat.png',
+            'message.png',
+            'notifaction.png',
+            'pencile&notepade.png',
+            'phone.png',
+            'radar-tracker.png',
+            'robot.png',
+            'robotarm.png',
+            'security.png',
+            'slidersettings.png',
+            'wrentch-tool.png'
+        ];
+
+        function populateIconGrid() {
+            const grid = document.getElementById('iconGrid');
+            
+            icons.forEach(iconFile => {
+                const iconName = iconFile.replace('.png', '').replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                const iconPath = `/public/assets/images/icons/${iconFile}`;
+                
+                const card = document.createElement('div');
+                card.className = 'icon-card';
+                
+                card.innerHTML = `
+                    <img src="${iconPath}" alt="${iconName}" loading="lazy">
+                    <div class="icon-name">${iconName}</div>
+                    <div class="icon-path">${iconFile}</div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Populate the grid when page loads
+        document.addEventListener('DOMContentLoaded', populateIconGrid);
+    </script>
+</body>
+</html>

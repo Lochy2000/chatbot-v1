@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Helper - Bot Playground</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-2px);
+        }
+
+        .tech-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(120, 200, 255, 0.1) 0%, transparent 50%);
+            animation: techPulse 4s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes techPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Demo page content */
+        .demo-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .demo-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .demo-content .hint {
+            font-size: 1rem;
+            opacity: 0.7;
+            margin-top: 2rem;
+        }
+
+        /* Floating Chat Button */
+        .chat-button {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            border: none;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .chat-icon {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .chat-button.active .chat-icon {
+            transform: rotate(180deg);
+        }
+
+        .pulse-ring {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        /* Chat Modal Overlay */
+        .chat-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .chat-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Chat Modal */
+        .chat-modal {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 380px;
+            max-width: calc(100vw - 48px);
+            height: 500px;
+            max-height: calc(100vh - 48px);
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%) scale(0.9);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1002;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-modal.active {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        /* Modal Header */
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 16px 16px 0 0;
+        }
+
+        .bot-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bot-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .bot-details h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .bot-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .status-text {
+            font-size: 12px;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+        }
+
+        .close-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: rgba(107, 114, 128, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .close-btn:hover {
+            background: rgba(107, 114, 128, 0.2);
+            color: #374151;
+        }
+
+        /* Modal Body */
+        .modal-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        #chat-messages {
+            flex: 1;
+            padding: 16px 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message {
+            display: flex;
+            flex-direction: column;
+            max-width: 80%;
+            animation: messageSlide 0.3s ease-out;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bot-message {
+            align-self: flex-start;
+        }
+
+        .user-message {
+            align-self: flex-end;
+        }
+
+        .message-content {
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .bot-message .message-content {
+            background: #f3f4f6;
+            color: #374151;
+            border-bottom-left-radius: 6px;
+        }
+
+        .user-message .message-content {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-bottom-right-radius: 6px;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 4px;
+            padding: 0 16px;
+        }
+
+        .user-message .message-time {
+            text-align: right;
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: #9ca3af;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-8px); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Modal Footer */
+        .modal-footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 16px 20px 20px 20px;
+        }
+
+        .quick-replies {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .quick-reply {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            white-space: nowrap;
+        }
+
+        .quick-reply:hover {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        #message-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 24px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease;
+            background: #f9fafb;
+        }
+
+        #message-input:focus {
+            border-color: #667eea;
+            background: white;
+        }
+
+        .send-button {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .send-button:hover {
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .token-count {
+            color: #6b7280;
+        }
+
+        .powered-by {
+            color: #9ca3af;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .chat-modal {
+                width: calc(100vw - 24px);
+                height: calc(100vh - 24px);
+                bottom: 12px;
+                right: 12px;
+            }
+            
+            .chat-button {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .quick-replies {
+                justify-content: center;
+            }
+            
+            .quick-reply {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        #chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        #chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 2px;
+        }
+
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+    <a href="/index.html" class="back-button">← Back to Playground</a>
+    
+    <div class="tech-bg"></div>
+    
+    <!-- Demo Content -->
+    <div class="demo-content">
+        <h1>Quick Helper Demo</h1>
+        <p>This demonstrates a lightweight modal chatbot that doesn't disrupt your main content.</p>
+        <p>Click the floating chat button to start a conversation!</p>
+        <div class="hint">The bot stays out of the way until you need it 💬</div>
+    </div>
+
+    <!-- Floating Chat Button -->
+    <div class="chat-button" id="chat-button" onclick="toggleChat()">
+        <div class="chat-icon">💬</div>
+        <div class="pulse-ring"></div>
+    </div>
+
+    <!-- Chat Modal Overlay -->
+    <div class="chat-overlay" id="chat-overlay" onclick="closeChat()"></div>
+
+    <!-- Chat Modal -->
+    <div class="chat-modal" id="chat-modal">
+        <div class="modal-header">
+            <div class="bot-info">
+                <div class="bot-avatar">🤖</div>
+                <div class="bot-details">
+                    <h3>QuickBot</h3>
+                    <span class="status-dot"></span>
+                    <span class="status-text">Online</span>
+                </div>
+            </div>
+            <button class="close-btn" onclick="closeChat()">✕</button>
+        </div>
+        
+        <div class="modal-body">
+            <div id="chat-messages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        👋 Hi! I'm QuickBot, your instant assistant. How can I help you today?
+                    </div>
+                    <div class="message-time">just now</div>
+                </div>
+            </div>
+            
+            <div class="typing-indicator hidden" id="typing-indicator">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span>QuickBot is typing...</span>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <div class="quick-replies">
+                <button class="quick-reply" onclick="sendQuickReply('Help with pricing')">💰 Pricing</button>
+                <button class="quick-reply" onclick="sendQuickReply('Contact support')">📞 Support</button>
+                <button class="quick-reply" onclick="sendQuickReply('Product info')">ℹ️ Info</button>
+            </div>
+            
+            <div class="input-container">
+                <input type="text" id="message-input" placeholder="Type your message..." maxlength="200">
+                <button class="send-button" id="send-button" onclick="sendMessage()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="footer-info">
+                <span class="token-count">Tokens: <span id="token-count">0</span></span>
+                <span class="powered-by">Powered by Gemini AI</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const chatButton = document.getElementById('chat-button');
+        const chatOverlay = document.getElementById('chat-overlay');
+        const chatModal = document.getElementById('chat-modal');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const chatMessages = document.getElementById('chat-messages');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const tokenCount = document.getElementById('token-count');
+
+        // Chat state
+        let isOpen = false;
+
+        // Toggle chat modal
+        function toggleChat() {
+            if (isOpen) {
+                closeChat();
+            } else {
+                openChat();
+            }
+        }
+
+        function openChat() {
+            isOpen = true;
+            chatButton.classList.add('active');
+            chatOverlay.classList.add('active');
+            chatModal.classList.add('active');
+            
+            // Focus input after animation
+            setTimeout(() => {
+                messageInput.focus();
+            }, 300);
+        }
+
+        function closeChat() {
+            isOpen = false;
+            chatButton.classList.remove('active');
+            chatOverlay.classList.remove('active');
+            chatModal.classList.remove('active');
+        }
+
+        // Send message function
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+            
+            addMessage(message, 'user');
+            messageInput.value = '';
+            
+            // Show typing indicator
+            showTyping();
+            
+            // Get bot response
+            getBotResponse(message).then(response => {
+                hideTyping();
+                addMessage(response, 'bot');
+            });
+        }
+
+        // Send quick reply
+        function sendQuickReply(message) {
+            addMessage(message, 'user');
+            
+            showTyping();
+            
+            getBotResponse(message).then(response => {
+                hideTyping();
+                addMessage(response, 'bot');
+            });
+        }
+
+        // Add message to chat
+        function addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const currentTime = new Date().toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">${content}</div>
+                <div class="message-time">${currentTime}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        // Show/hide typing indicator
+        function showTyping() {
+            typingIndicator.classList.remove('hidden');
+            scrollToBottom();
+        }
+
+        function hideTyping() {
+            typingIndicator.classList.add('hidden');
+        }
+
+        // Scroll to bottom of messages
+        function scrollToBottom() {
+            setTimeout(() => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 100);
+        }
+
+        // Get bot response from API
+        async function getBotResponse(userMessage) {
+            try {
+                // Check if we're running locally
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                
+                if (isLocal) {
+                    // Show local development message
+                    return `🔧 <strong>Local Development Mode</strong><br><br>The AI functionality requires deployment to work properly. For now, you can explore the minimal modal interface.<br><br>When deployed to Vercel, this bot will respond to: "${userMessage}" with quick, helpful answers!`;
+                }
+                
+                // Create lightweight bot prompt
+                const quickBotPrompt = `You are QuickBot, a helpful and concise AI assistant. 
+                Keep responses brief, friendly, and to the point (1-2 sentences max). 
+                Use emojis sparingly and be direct and helpful.
+                
+                User message: ${userMessage}`;
+                
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: quickBotPrompt
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    console.warn("API error:", data.error);
+                    return `Sorry, I'm having trouble right now. Please try again! 🔄`;
+                }
+                
+                // Update token count
+                if (data.tokens?.totalTokenCount) {
+                    tokenCount.textContent = data.tokens.totalTokenCount;
+                }
+                
+                return formatQuickResponse(data.reply);
+            } catch (error) {
+                console.error("Request failed:", error);
+                return "⚠️ This is a demo running locally. Deploy to Vercel for full AI functionality!";
+            }
+        }
+
+        // Format bot response
+        function formatQuickResponse(reply) {
+            // Escape HTML and keep it simple
+            const safe = reply.replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[m]));
+            
+            // Keep responses concise - truncate if too long
+            if (safe.length > 150) {
+                return safe.substring(0, 147) + '...';
+            }
+            
+            return safe;
+        }
+
+        // Enter key to send message
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Prevent modal close when clicking inside modal
+        chatModal.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // Auto-resize input on mobile
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add welcome animation after a short delay
+            setTimeout(() => {
+                chatButton.style.animation = 'pulse 2s infinite';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

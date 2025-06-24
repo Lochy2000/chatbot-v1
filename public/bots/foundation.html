@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Assistant - Bot Playground</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0c0c1f;
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .star-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.3)"/><circle cx="80" cy="40" r="0.5" fill="rgba(255,255,255,0.2)"/><circle cx="40" cy="80" r="0.8" fill="rgba(255,255,255,0.4)"/><circle cx="60" cy="10" r="0.3" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: starfield 60s linear infinite;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        @keyframes starfield {
+            to {
+                background-position: 1000px 1000px;
+            }
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-2px);
+        }
+
+        .chat-orb {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            width: 90%;
+            max-width: 480px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            box-shadow: 0 0 20px rgba(59,130,246,0.4);
+        }
+
+        h1 {
+            margin: 0;
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        #chat-box {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-y: auto;
+            font-size: 0.95rem;
+        }
+
+        .msg {
+            margin-bottom: 1rem;
+        }
+
+        .msg span {
+            display: inline-block;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+
+        .msg.user span {
+            background: #3B82F6;
+            color: #fff;
+            align-self: flex-end;
+            float: right;
+        }
+
+        .msg.bot span {
+            background: #1f2937;
+            color: #f3f4f6;
+            align-self: flex-start;
+            float: left;
+        }
+
+        .msg em {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 0.3rem;
+            clear: both;
+        }
+
+        #token-badge {
+            font-size: 0.8rem;
+            text-align: right;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+        }
+
+        .chat-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .chat-controls select {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 10px;
+            background: #111827;
+            color: white;
+            border: none;
+        }
+
+        .chat-controls button {
+            background: #3B82F6;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 10px;
+            border: none;
+            background: #111827;
+            color: white;
+        }
+
+        .chat-input button {
+            background: #3B82F6;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+        }
+
+        .thinking-banner {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(59,130,246,0.85);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0 0 12px 12px;
+            font-size: 0.85rem;
+            z-index: 10;
+            animation: fadeIn 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -10px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        .dots::after {
+            content: '';
+            display: inline-block;
+            width: 1em;
+            text-align: left;
+            animation: dots 1s steps(3, end) infinite;
+        }
+
+        @keyframes dots {
+            0% { content: ''; }
+            33% { content: '.'; }
+            66% { content: '..'; }
+            100% { content: '...'; }
+        }
+
+        .msg span {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .msg.user span::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 10px;
+            border: 6px solid transparent;
+            border-left-color: #3B82F6;
+        }
+
+        .msg.bot span::after {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 10px;
+            border: 6px solid transparent;
+            border-right-color: #1f2937;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .chat-orb {
+                height: 95vh;
+            }
+            #chat-box {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/index.html" class="back-button">← Back to Playground</a>
+    
+    <div class="star-bg"></div>
+    <div class="chat-orb">
+        <h1>✨ AI Orb</h1>
+        <div id="chat-box">
+            <div class="msg bot">
+                <span>🌟 Welcome to the Adaptive AI Assistant! I can switch between different personality modes:
+                <br>• Neutral: Balanced, professional responses
+                <br>• Tech Advisor: Technical insights and guidance  
+                <br>• Deep Thinker: Philosophical and thoughtful perspectives
+                <br><br>Choose a mode below and let's chat!</span>
+                <em>just now</em>
+            </div>
+        </div>
+        <div id="token-badge">🔢 Tokens: 0</div>
+        <div class="chat-controls">
+            <select id="agent">
+                <option value="neutral">Neutral</option>
+                <option value="tech">Tech Advisor</option>
+                <option value="philosophy">Deep Thinker</option>
+            </select>
+            <button id="theme-toggle">🌙</button>
+            <button id="clear-btn">🗑 Clear</button>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Ask me anything...">
+            <button onclick="send()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById("chat-box");
+        const userInput = document.getElementById("user-input");
+        const agentSelect = document.getElementById("agent");
+        const themeToggle = document.getElementById("theme-toggle");
+        const clearBtn = document.getElementById("clear-btn");
+        const tokenBadge = document.getElementById("token-badge");
+        let thinkingBanner = null;
+
+        clearBtn.onclick = () => {
+            chatBox.innerHTML = "";
+            tokenBadge.innerText = "🔢 Tokens: 0";
+        };
+
+        themeToggle.onclick = () => {
+            document.body.classList.toggle("light");
+            themeToggle.textContent = document.body.classList.contains("light") ? "🌞" : "🌙";
+        };
+
+        function send() {
+            const msg = userInput.value.trim();
+            if (!msg) return;
+            append("user", msg);
+            userInput.value = "";
+            const placeholder = append("bot", `<span class="typing">Typing<span class="dots"></span></span>`);
+            showThinkingBanner();
+            getBotReply(msg).then(reply => {
+                updateLast(reply, placeholder);
+                hideThinkingBanner();
+            });
+        }
+
+        function append(sender, html) {
+            const el = document.createElement("div");
+            el.className = `msg ${sender}`;
+            el.innerHTML = `<span>${html}</span><em>${new Date().toLocaleTimeString()}</em>`;
+            chatBox.appendChild(el);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return el;
+        }
+
+        function updateLast(html, placeholder) {
+            if (placeholder && placeholder.querySelector("span")) {
+                placeholder.querySelector("span").innerHTML = html;
+            }
+        }
+
+        async function getBotReply(userMessage) {
+            try {
+                // Check if we're running locally
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                
+                if (isLocal) {
+                    // Show local development message
+                    return `🔧 <strong>Local Development Mode</strong><br><br>The AI functionality requires deployment to work properly. For now, you can explore the personality switching interface.<br><br>When deployed to Vercel, this bot will respond to: "${userMessage}" in ${agentSelect.value} mode!`;
+                }
+
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: generatePrompt(userMessage, agentSelect.value)
+                    })
+                });
+                
+                const data = await res.json();
+                
+                if (data.error) {
+                    console.warn("Gemini error:", data.error);
+                    return `⚠️ <strong>Error:</strong> ${data.error}`;
+                }
+                
+                const tokenCount = data.tokens?.totalTokenCount || 0;
+                tokenBadge.innerText = `🔢 Tokens: ${tokenCount}`;
+                
+                return styleReply(agentSelect.value, userMessage, data.reply);
+            } catch (e) {
+                console.error("Request failed:", e);
+                return "⚠️ This is a demo running locally. Deploy to Vercel for full AI functionality!";
+            }
+        }
+
+        function generatePrompt(userMessage, agentType) {
+            const prompts = {
+                neutral: `You are a helpful, balanced AI assistant. Provide clear, professional, and informative responses. User message: ${userMessage}`,
+                tech: `You are a Tech Advisor AI with deep technical expertise. Provide technical insights, best practices, and actionable guidance. Focus on practical solutions and industry knowledge. User message: ${userMessage}`,
+                philosophy: `You are a Deep Thinker AI that explores philosophical perspectives and thoughtful analysis. Consider multiple viewpoints, ask profound questions, and encourage deeper reflection. User message: ${userMessage}`
+            };
+            
+            return prompts[agentType] || prompts.neutral;
+        }
+
+        function styleReply(agent, userInput, reply) {
+            const safe = escapeHTML(reply);
+            switch (agent) {
+                case "tech": return `💡 <strong>Tech Insight:</strong><br>${safe}`;
+                case "philosophy": return `📜 <em>${safe}</em>`;
+                default: return `🤖 ${safe}`;
+            }
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[m]));
+        }
+
+        function showThinkingBanner() {
+            if (!thinkingBanner) {
+                thinkingBanner = document.createElement("div");
+                thinkingBanner.className = "thinking-banner";
+                thinkingBanner.innerHTML = "✨ AI is thinking...";
+                document.body.appendChild(thinkingBanner);
+            }
+        }
+
+        function hideThinkingBanner() {
+            if (thinkingBanner) {
+                thinkingBanner.remove();
+                thinkingBanner = null;
+            }
+        }
+
+        // Enter key functionality
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                send();
+            }
+        });
+
+        // Auto-focus input
+        userInput.focus();
+    </script>
+</body>
+</html>

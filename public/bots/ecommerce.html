@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Assistant - Bot Playground</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shopping-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-2px);
+        }
+
+        .chat-container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            width: 90%;
+            max-width: 450px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            margin: 0.5rem 0 0 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        #chat-box {
+            flex: 1;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-y: auto;
+            font-size: 0.95rem;
+            border: 1px solid #e9ecef;
+        }
+
+        .msg {
+            margin-bottom: 1rem;
+            clear: both;
+        }
+
+        .msg span {
+            display: inline-block;
+            padding: 0.75rem 1rem;
+            border-radius: 18px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+
+        .msg.user span {
+            background: #667eea;
+            color: white;
+            float: right;
+            border-bottom-right-radius: 5px;
+        }
+
+        .msg.bot span {
+            background: white;
+            color: #333;
+            float: left;
+            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .msg em {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 0.3rem;
+            clear: both;
+            text-align: center;
+        }
+
+        #token-badge {
+            font-size: 0.8rem;
+            text-align: right;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            background: #f8f9fa;
+            border: 1px solid #667eea;
+            color: #667eea;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            background: white;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .send-btn {
+            background: #667eea;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            background: #5a67d8;
+            transform: scale(1.05);
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            font-style: italic;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .product-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+        }
+
+        .product-card h4 {
+            margin: 0 0 0.5rem 0;
+            color: #667eea;
+        }
+
+        .product-card p {
+            margin: 0.2rem 0;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 480px) {
+            .chat-container {
+                height: 95vh;
+                padding: 1rem;
+            }
+            
+            .quick-actions {
+                justify-content: center;
+            }
+            
+            .quick-btn {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/index.html" class="back-button">← Back to Playground</a>
+    
+    <div class="shopping-bg"></div>
+    
+    <div class="chat-container">
+        <div class="header">
+            <h1>🛍️ ShopBot</h1>
+            <p>Your personal shopping assistant</p>
+        </div>
+        
+        <div id="chat-box">
+            <div class="msg bot">
+                <span>👋 Welcome to ShopBot! I'm here to help you with:
+                <br>• Product recommendations
+                <br>• Order tracking
+                <br>• Returns & exchanges
+                <br>• Size guides
+                <br><br>How can I assist you today?</span>
+                <em>just now</em>
+            </div>
+        </div>
+        
+        <div id="token-badge">🔢 Tokens: 0</div>
+        
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="quickAction('Track my order')">📦 Track Order</button>
+            <button class="quick-btn" onclick="quickAction('Return policy')">🔄 Returns</button>
+            <button class="quick-btn" onclick="quickAction('Size guide')">📏 Size Guide</button>
+            <button class="quick-btn" onclick="quickAction('Product recommendations')">💡 Recommendations</button>
+        </div>
+        
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Ask about products, orders, or policies...">
+            <button class="send-btn" onclick="send()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById("chat-box");
+        const userInput = document.getElementById("user-input");
+
+        // Sample product data
+        const sampleProducts = [
+            { name: "Wireless Headphones", price: "$99", rating: "4.5⭐", description: "Premium sound quality with noise cancellation" },
+            { name: "Smart Watch", price: "$249", rating: "4.7⭐", description: "Fitness tracking with heart rate monitor" },
+            { name: "Laptop Stand", price: "$45", rating: "4.3⭐", description: "Ergonomic aluminum design" },
+            { name: "Bluetooth Speaker", price: "$79", rating: "4.6⭐", description: "Portable with 12-hour battery life" },
+            { name: "Phone Case", price: "$25", rating: "4.4⭐", description: "Drop protection with wireless charging support" }
+        ];
+
+        function send() {
+            const msg = userInput.value.trim();
+            if (!msg) return;
+            
+            addMessage("user", msg);
+            userInput.value = "";
+            
+            // Show typing indicator
+            const typingId = addTypingIndicator();
+            
+            getBotReply(msg).then(reply => {
+                removeTypingIndicator(typingId);
+                addMessage("bot", reply);
+            });
+        }
+
+        function quickAction(action) {
+            addMessage("user", action);
+            
+            const typingId = addTypingIndicator();
+            
+            getBotReply(action).then(reply => {
+                removeTypingIndicator(typingId);
+                addMessage("bot", reply);
+            });
+        }
+
+        function addMessage(sender, content) {
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `msg ${sender}`;
+            msgDiv.innerHTML = `
+                <span>${content}</span>
+                <em>${new Date().toLocaleTimeString()}</em>
+            `;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const typingDiv = document.createElement("div");
+            typingDiv.className = "msg bot typing-msg";
+            typingDiv.innerHTML = `
+                <span class="typing-indicator">
+                    ShopBot is typing
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </span>
+            `;
+            chatBox.appendChild(typingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return typingDiv;
+        }
+
+        function removeTypingIndicator(typingElement) {
+            if (typingElement && typingElement.parentNode) {
+                typingElement.parentNode.removeChild(typingElement);
+            }
+        }
+
+        async function getBotReply(userMessage) {
+            try {
+                // Check if we're running locally
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                
+                if (isLocal) {
+                    // Show local development message
+                    return `🔧 <strong>Local Development Mode</strong><br><br>The AI functionality requires deployment to work properly. For now, you can explore the interface and design.<br><br>When deployed to Vercel, this bot will respond to: "${userMessage}" with intelligent e-commerce assistance!`;
+                }
+                
+                // Create e-commerce specific prompt
+                const ecommercePrompt = `You are ShopBot, a helpful e-commerce customer support assistant. 
+                Respond as a friendly shopping assistant helping with: order tracking, returns/exchanges, size guides, 
+                product recommendations, payment help, and general customer support. 
+                Keep responses concise and helpful. Use emojis appropriately.
+                
+                Customer message: ${userMessage}`;
+                
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: ecommercePrompt
+                    })
+                });
+                
+                const data = await res.json();
+                
+                if (data.error) {
+                    console.warn("Gemini error:", data.error);
+                    return `⚠️ <strong>Error:</strong> ${data.error}`;
+                }
+                
+                // Update token badge if it exists
+                const tokenBadge = document.getElementById("token-badge");
+                if (tokenBadge) {
+                    const tokenCount = data.tokens?.totalTokenCount || 0;
+                    tokenBadge.innerText = `🔢 Tokens: ${tokenCount}`;
+                }
+                
+                return styleEcommerceReply(data.reply);
+            } catch (e) {
+                console.error("Request failed:", e);
+                return "⚠️ This is a demo running locally. Deploy to Vercel for full AI functionality!";
+            }
+        }
+
+        function styleEcommerceReply(reply) {
+            const safe = escapeHTML(reply);
+            return `🛍️ ${safe}`;
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[m]));
+        }
+
+        // Enter key functionality
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                send();
+            }
+        });
+
+        // Auto-focus input
+        userInput.focus();
+    </script>
+</body>
+</html>
