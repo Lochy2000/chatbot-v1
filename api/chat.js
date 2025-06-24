@@ -2,16 +2,20 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Available model configurations
 const MODELS = {
-  // Gemini models
+  // Gemini models (free with your API key)
   'gemini-1.5-flash': { provider: 'gemini', name: 'gemini-1.5-flash' },
   'gemini-1.5-pro': { provider: 'gemini', name: 'gemini-1.5-pro' },
   
-  // OpenRouter models
-  'claude-3.5-sonnet': { provider: 'openrouter', name: 'anthropic/claude-3.5-sonnet' },
-  'gpt-4o': { provider: 'openrouter', name: 'openai/gpt-4o' },
-  'gpt-4o-mini': { provider: 'openrouter', name: 'openai/gpt-4o-mini' },
-  'llama-3.1-70b': { provider: 'openrouter', name: 'meta-llama/llama-3.1-70b-instruct' },
-  'claude-3-haiku': { provider: 'openrouter', name: 'anthropic/claude-3-haiku' }
+  // OpenRouter free models
+  'kimi-vl-thinking': { provider: 'openrouter', name: 'moonshotai/kimi-vl-a3b-thinking:free' },
+  'llama-4-scout': { provider: 'openrouter', name: 'meta-llama/llama-4-scout:free' },
+  'llama-4-maverick': { provider: 'openrouter', name: 'meta-llama/llama-4-maverick:free' },
+  'gemini-2.5-pro': { provider: 'openrouter', name: 'google/gemini-2.5-pro-exp-03-25:free' },
+  'minimax-m1': { provider: 'openrouter', name: 'minimax/m1:free' },
+  'minimax-m1-extended': { provider: 'openrouter', name: 'minimax/m1-extended:free' },
+  'mistral-small': { provider: 'openrouter', name: 'mistralai/mistral-small-3.2-24b:free' },
+  'deepseek-v3': { provider: 'openrouter', name: 'deepseek/deepseek-v3-0324:free' },
+  'deepseek-r1': { provider: 'openrouter', name: 'deepseek/deepseek-r1:free' }
 };
 
 async function callGemini(modelName, message) {

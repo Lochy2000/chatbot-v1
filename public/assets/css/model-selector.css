@@ -16,19 +16,21 @@
 
 .model-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.4rem;
+    max-height: 120px;
+    overflow-y: auto;
 }
 
 .model-option {
-    padding: 0.5rem;
+    padding: 0.4rem;
     border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 500;
 }
 
@@ -45,11 +47,12 @@
 
 .model-option .model-name {
     font-weight: 600;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.15rem;
+    line-height: 1.1;
 }
 
 .model-option .model-provider {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     opacity: 0.8;
 }
 

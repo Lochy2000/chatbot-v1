@@ -7,11 +7,15 @@ class ModelSelector {
         this.models = {
             'gemini-1.5-flash': { name: 'Gemini 1.5 Flash', provider: 'gemini', description: 'Fast & efficient' },
             'gemini-1.5-pro': { name: 'Gemini 1.5 Pro', provider: 'gemini', description: 'More capable' },
-            'claude-3.5-sonnet': { name: 'Claude 3.5 Sonnet', provider: 'openrouter', description: 'Anthropic\'s best' },
-            'gpt-4o': { name: 'GPT-4o', provider: 'openrouter', description: 'OpenAI flagship' },
-            'gpt-4o-mini': { name: 'GPT-4o Mini', provider: 'openrouter', description: 'Fast & affordable' },
-            'llama-3.1-70b': { name: 'Llama 3.1 70B', provider: 'openrouter', description: 'Meta\'s latest' },
-            'claude-3-haiku': { name: 'Claude 3 Haiku', provider: 'openrouter', description: 'Fast Claude' }
+            'kimi-vl-thinking': { name: 'Kimi VL Thinking', provider: 'openrouter', description: 'Visual reasoning' },
+            'llama-4-scout': { name: 'Llama 4 Scout', provider: 'openrouter', description: 'Latest Llama' },
+            'llama-4-maverick': { name: 'Llama 4 Maverick', provider: 'openrouter', description: 'Advanced Llama' },
+            'gemini-2.5-pro': { name: 'Gemini 2.5 Pro', provider: 'openrouter', description: 'Experimental' },
+            'minimax-m1': { name: 'MiniMax M1', provider: 'openrouter', description: 'Compact model' },
+            'minimax-m1-extended': { name: 'MiniMax M1 Extended', provider: 'openrouter', description: 'Extended context' },
+            'mistral-small': { name: 'Mistral Small', provider: 'openrouter', description: 'Efficient French AI' },
+            'deepseek-v3': { name: 'DeepSeek V3', provider: 'openrouter', description: 'Code specialist' },
+            'deepseek-r1': { name: 'DeepSeek R1', provider: 'openrouter', description: 'Reasoning model' }
         };
         this.render();
     }
