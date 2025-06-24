@@ -1,22 +1,26 @@
 {
-  "version": 2,
   "functions": {
     "api/chat.js": {
+      "maxDuration": 30
+    },
+    "api/quote.js": {
       "maxDuration": 30
     }
   },
   "rewrites": [
     {
-      "source": "/assets/(.*)",
-      "destination": "/public/assets/$1"
-    },
-    {
       "source": "/bots/(.*)",
       "destination": "/public/bots/$1"
-    },
+    }
+  ],
+  "headers": [
     {
-      "source": "/icon-gallery.html",
-      "destination": "/public/icon-gallery.html"
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+      ]
     }
   ]
 }

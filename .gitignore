@@ -1,1 +1,22 @@
+# Environment variables
 .env.local
+.env
+.env.production
+
+# Dependencies
+node_modules/
+
+# Vercel
+.vercel
+
+# Local development
+.DS_Store
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
