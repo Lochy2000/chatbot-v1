@@ -1,3 +1,6 @@
+
+![image](https://github.com/user-attachments/assets/c12194ce-b0cc-44af-900f-421c294b20ad)
+
 # 🤖 Bot Playground
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=vercel)](https://your-deployed-url.vercel.app)
