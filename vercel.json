@@ -7,12 +7,6 @@
       "maxDuration": 30
     }
   },
-  "rewrites": [
-    {
-      "source": "/bots/(.*)",
-      "destination": "/public/bots/$1"
-    }
-  ],
   "headers": [
     {
       "source": "/api/(.*)",
