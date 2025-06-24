@@ -1,0 +1,59 @@
+/* Model Selector Styles */
+.model-selector {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.model-selector h4 {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.model-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+}
+
+.model-option {
+    padding: 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.model-option:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.model-option.selected {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+}
+
+.model-option .model-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.model-option .model-provider {
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+.provider-gemini { color: #4285f4; }
+.provider-openrouter { color: #ff6b35; }
+.selected .provider-gemini,
+.selected .provider-openrouter { color: rgba(255, 255, 255, 0.9); }

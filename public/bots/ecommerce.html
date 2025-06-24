@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Assistant - Bot Playground</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="../assets/css/model-selector.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -291,6 +292,9 @@
             <p>Your personal shopping assistant</p>
         </div>
         
+        <!-- Model Selector -->
+        <div id="model-selector-container"></div>
+        
         <div id="chat-box">
             <div class="msg bot">
                 <span>👋 Welcome to ShopBot! I'm here to help you with:
@@ -318,9 +322,14 @@
         </div>
     </div>
 
+    <script src="../assets/js/model-selector.js"></script>
     <script>
         const chatBox = document.getElementById("chat-box");
         const userInput = document.getElementById("user-input");
+
+        // Initialize model selector
+        let modelSelector;
+        let selectedModel = 'gemini-1.5-flash';
 
         // Sample product data
         const sampleProducts = [
@@ -417,7 +426,9 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        message: ecommercePrompt
+                        message: ecommercePrompt,
+                        model: selectedModel,
+                        botType: 'ecommerce'
                     })
                 });
                 
@@ -462,6 +473,14 @@
 
         // Auto-focus input
         userInput.focus();
+
+        // Initialize model selector after page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            modelSelector = createModelSelector('model-selector-container', 'gemini-1.5-flash', function(newModel) {
+                selectedModel = newModel;
+                console.log('Model changed to:', newModel);
+            });
+        });
     </script>
 </body>
 </html>
