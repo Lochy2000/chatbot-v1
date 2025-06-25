@@ -1,21 +1,18 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// Available model configurations
+// Available model configurations - only working models
 const MODELS = {
-  // Gemini models (free with your API key)
+  // Gemini models (reliable)
   'gemini-1.5-flash': { provider: 'gemini', name: 'gemini-1.5-flash' },
   'gemini-1.5-pro': { provider: 'gemini', name: 'gemini-1.5-pro' },
   
-  // OpenRouter free models
-  'kimi-vl-thinking': { provider: 'openrouter', name: 'moonshotai/kimi-vl-a3b-thinking:free' },
+  // OpenRouter models (tested working)
   'llama-4-scout': { provider: 'openrouter', name: 'meta-llama/llama-4-scout:free' },
   'llama-4-maverick': { provider: 'openrouter', name: 'meta-llama/llama-4-maverick:free' },
-  'gemini-2.5-pro': { provider: 'openrouter', name: 'google/gemini-2.5-pro-exp-03-25:free' },
-  'minimax-m1': { provider: 'openrouter', name: 'minimax/m1:free' },
-  'minimax-m1-extended': { provider: 'openrouter', name: 'minimax/m1-extended:free' },
-  'mistral-small': { provider: 'openrouter', name: 'mistralai/mistral-small-3.2-24b:free' },
   'deepseek-v3': { provider: 'openrouter', name: 'deepseek/deepseek-v3-0324:free' },
-  'deepseek-r1': { provider: 'openrouter', name: 'deepseek/deepseek-r1:free' }
+  'deepseek-r1': { provider: 'openrouter', name: 'deepseek/deepseek-r1:free' },
+  'gemini-2.5-pro': { provider: 'openrouter', name: 'google/gemini-2.5-pro-exp-03-25:free' },
+  'mistral-small': { provider: 'openrouter', name: 'mistralai/mistral-small-3.2-24b:free' }
 };
 
 async function callGemini(modelName, message) {
@@ -134,11 +131,18 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('API Error:', error);
+    console.error('API Error Details:', {
+      error: error.message,
+      model: model,
+      provider: modelConfig?.provider,
+      stack: error.stack
+    });
     
     return res.status(500).json({
       error: 'Failed to get response from AI',
-      details: error.message
+      details: error.message,
+      model: model,
+      provider: modelConfig?.provider || 'unknown'
     });
   }
 }

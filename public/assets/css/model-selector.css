@@ -1,62 +1,68 @@
-/* Model Selector Styles */
+/* Compact Model Selector Styles */
 .model-selector {
     margin-bottom: 1rem;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
 }
 
-.model-selector h4 {
-    margin: 0 0 0.75rem 0;
-    font-size: 0.9rem;
-    font-weight: 600;
+.model-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.model-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
     color: #333;
-}
-
-.model-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 0.4rem;
-    max-height: 120px;
-    overflow-y: auto;
-}
-
-.model-option {
-    padding: 0.4rem;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: center;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     font-weight: 500;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5L3 6h10l-5 5.5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px;
+    padding-right: 2.5rem;
 }
 
-.model-option:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
+.model-select:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
-.model-option.selected {
-    background: #667eea;
+.model-select:focus {
+    outline: none;
     border-color: #667eea;
-    color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.model-option .model-name {
+.model-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.current-provider {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
     font-weight: 600;
-    margin-bottom: 0.15rem;
-    line-height: 1.1;
 }
 
-.model-option .model-provider {
-    font-size: 0.6rem;
-    opacity: 0.8;
+.provider-gemini {
+    background: rgba(66, 133, 244, 0.2);
+    color: #4285f4;
 }
 
-.provider-gemini { color: #4285f4; }
-.provider-openrouter { color: #ff6b35; }
-.selected .provider-gemini,
-.selected .provider-openrouter { color: rgba(255, 255, 255, 0.9); }
+.provider-openrouter {
+    background: rgba(255, 107, 53, 0.2);
+    color: #ff6b35;
+}
+
+.model-status {
+    color: rgba(255, 255, 255, 0.7);
+}

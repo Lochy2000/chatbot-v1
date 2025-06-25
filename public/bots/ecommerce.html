@@ -67,8 +67,8 @@
             border-radius: 20px;
             backdrop-filter: blur(15px);
             width: 90%;
-            max-width: 450px;
-            height: 90vh;
+            max-width: 500px;
+            height: 95vh;
             display: flex;
             flex-direction: column;
             padding: 1.5rem;
@@ -78,8 +78,8 @@
 
         .header {
             text-align: center;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
             border-bottom: 2px solid #f0f0f0;
         }
 
@@ -435,8 +435,16 @@
                 const data = await res.json();
                 
                 if (data.error) {
-                    console.warn("Gemini error:", data.error);
-                    return `⚠️ <strong>Error:</strong> ${data.error}`;
+                    console.error("API Error Details:", {
+                        error: data.error,
+                        details: data.details,
+                        model: data.model,
+                        provider: data.provider,
+                        selectedModel: selectedModel
+                    });
+                    return `⚠️ <strong>Error with ${data.model || selectedModel}:</strong><br>
+                            ${data.details || data.error}<br>
+                            <small>Try switching to a different model above.</small>`;
                 }
                 
                 // Update token badge if it exists
