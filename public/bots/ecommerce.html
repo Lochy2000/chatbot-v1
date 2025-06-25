@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Assistant - Bot Playground</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="../assets/css/model-selector.css" rel="stylesheet">
+    <link href="../assets/css/model-selector.css" rel="stylesheet" id="model-selector-css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
@@ -282,7 +282,7 @@
     </style>
 </head>
 <body>
-    <a href="../index.html" class="back-button">← Back to Playground</a>
+    <a href="../index.html" class="back-button" id="back-button">← Back to Playground</a>
     
     <div class="shopping-bg"></div>
     
@@ -322,6 +322,7 @@
         </div>
     </div>
 
+    <script src="../assets/js/path-manager.js"></script>
     <script src="../assets/js/model-selector.js"></script>
     <script>
         const chatBox = document.getElementById("chat-box");
@@ -484,11 +485,33 @@
 
         // Initialize model selector after page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Fix paths for local vs production
+            fixPaths();
+            
             modelSelector = createModelSelector('model-selector-container', 'gemini-1.5-flash', function(newModel) {
                 selectedModel = newModel;
                 console.log('Model changed to:', newModel);
             });
         });
+
+        // Fix paths based on environment
+        function fixPaths() {
+            // Fix back button
+            const backButton = document.getElementById('back-button');
+            if (backButton) {
+                if (pathManager.isLocal) {
+                    backButton.href = '../index.html';
+                } else {
+                    backButton.href = '/index.html';
+                }
+            }
+
+            // Fix CSS path
+            const cssLink = document.getElementById('model-selector-css');
+            if (cssLink && pathManager.isLocal) {
+                cssLink.href = '../assets/css/model-selector.css';
+            }
+        }
     </script>
 </body>
 </html>

@@ -8,8 +8,9 @@
   },
   "scripts": {
     "dev": "vercel dev",
-    "dev-local": "python -m http.server 8000",
-    "dev-node": "npx serve .",
+    "dev:local": "cd public && python -m http.server 8000",
+    "dev:express": "node scripts/dev-server.js",
+    "dev:node": "npx serve .",
     "build": "echo 'Static files ready for deployment'",
     "start": "vercel --prod"
   },
@@ -17,7 +18,8 @@
     "@google/generative-ai": "^0.2.1"
   },
   "devDependencies": {
-    "serve": "^14.2.1"
+    "serve": "^14.2.1",
+    "express": "^4.18.2"
   },
   "keywords": [
     "ai",
