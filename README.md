@@ -11,7 +11,6 @@
 
 > **An interactive demonstration site showcasing different types of AI chatbots designed for specific use cases.**
 
-![chaticon](https://github.com/user-attachments/assets/a3af66a1-2740-4556-90b6-9e344ad2acb2)
 
 ---
 
