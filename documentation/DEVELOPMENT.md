@@ -5,7 +5,7 @@
 ### Method 1: Python Server (Recommended for Simple Testing)
 ```bash
 # Serve from public directory
-npm run dev:local
+npm run dev
 # or manually:
 cd public && python -m http.server 8000
 ```
@@ -13,7 +13,7 @@ cd public && python -m http.server 8000
 ### Method 2: Vercel Development (Recommended for Full Testing)
 ```bash
 # Full Vercel simulation with API routes
-npm run dev
+npm run dev:vercel
 ```
 
 ### Method 3: Express Server (Alternative)
@@ -95,13 +95,13 @@ const backPath = isLocal ? '../index.html' : '/index.html';
 
 1. **Test Local**:
    ```bash
-   npm run dev:local
+   npm run dev
    # Check http://localhost:8000
    ```
 
 2. **Test Production Simulation**:
    ```bash
-   npm run dev
+   npm run dev:vercel
    # Check http://localhost:3000 (Vercel dev)
    ```
 

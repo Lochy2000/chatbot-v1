@@ -7,10 +7,10 @@
     "node": "18.x"
   },
   "scripts": {
-    "dev": "vercel dev",
-    "dev:local": "cd public && python -m http.server 8000",
+    "dev:vercel": "vercel dev",
+    "dev": "cd public && python -m http.server 8000",
     "dev:express": "node scripts/dev-server.js",
-    "dev:node": "npx serve .",
+    "dev:serve": "npx serve public -p 8000",
     "build": "echo 'Static files ready for deployment'",
     "start": "vercel --prod"
   },
