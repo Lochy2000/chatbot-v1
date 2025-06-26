@@ -7,12 +7,10 @@
     "node": "18.x"
   },
   "scripts": {
-    "dev:vercel": "vercel dev",
     "dev": "cd public && python -m http.server 8000",
-    "dev:express": "node scripts/dev-server.js",
     "dev:serve": "npx serve public -p 8000",
     "build": "echo 'Static files ready for deployment'",
-    "start": "vercel --prod"
+    "start": "npx serve public"
   },
   "dependencies": {
     "@google/generative-ai": "^0.2.1"
