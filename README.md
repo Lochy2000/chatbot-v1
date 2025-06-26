@@ -1,5 +1,5 @@
 
-![image](https://github.com/user-attachments/assets/c12194ce-b0cc-44af-900f-421c294b20ad)
+![chatty bot](https://github.com/user-attachments/assets/3f9d7f4d-6e1c-48f8-95fa-62b4101ba0d1)
 
 # Bot Playground
 
@@ -11,7 +11,6 @@
 
 > **An interactive demonstration site showcasing different types of AI chatbots designed for specific use cases.**
 
-![chaticon](https://github.com/user-attachments/assets/a3af66a1-2740-4556-90b6-9e344ad2acb2)
 
 ---
 
