@@ -34,6 +34,7 @@ Most websites use generic chatbots that try to handle everything. But different 
 | **Academic Guide** | ![Education](public/assets/images/icons/graduation.png) | Educational institution bot | Course info, Admissions, Campus life, Rate limiting |
 | **Quick Helper** | ![Chat](public/assets/images/icons/message.png) | Lightweight modal interface | Minimal UI, Quick replies, Non-disruptive |
 | **Adaptive Assistant** | ![Robot](public/assets/images/icons/robot.png) | Multi-personality bot | Adaptable responses, Multiple modes, Versatile |
+| **MORE ON THERE WAY** | ![image](https://github.com/user-attachments/assets/591990cf-5c9d-4ec6-b5ac-e13efda3a80c) | |  |
 
 ---
 
