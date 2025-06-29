@@ -201,24 +201,24 @@ npm start
 
 ##  **Bot-Specific Features**
 
-### 🛍️ Shopping Assistant
+###  Shopping Assistant
 - **Product-focused prompts**: E-commerce terminology and context
 - **Visual design**: Shopping-themed gradients and icons
 - **Features**: Product search, order tracking, returns handling
 
-### 🎓 Academic Guide (Newly Completed!)
+###  Academic Guide (Newly Completed!)
 - **Educational prompts**: Course, admission, and campus information
 - **Rate limiting**: Demonstrates usage controls (10 messages/session)
 - **Token tracking**: Real-time usage monitoring
 - **Quick actions**: Pre-defined common questions
 - **Structured responses**: Organized with headings and bullet points
 
-### 💬 Quick Helper
+###  Quick Helper
 - **Minimal UI**: Modal-based, non-disruptive design
 - **Fast responses**: Optimized for quick interactions
 - **Lightweight**: Minimal resource usage
 
-### ⚡ Adaptive Assistant
+###  Adaptive Assistant
 - **Multi-personality**: Adapts communication style
 - **Versatile responses**: Handles various conversation types
 - **Dynamic behavior**: Changes based on user interaction

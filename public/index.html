@@ -257,14 +257,186 @@
             border-radius: 20px;
             padding: 2rem;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            height: auto;
+            min-height: 400px;
         }
 
         .bot-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .bot-card.expanded {
+            min-height: 500px;
+        }
+
+        /* Bot card content layers */
+        .bot-content {
+            position: relative;
+            z-index: 2;
+            transition: all 0.5s ease;
+        }
+
+        .bot-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bot-card:hover .bot-preview {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .preview-icon {
+            font-size: 1.5rem;
+        }
+
+        .preview-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Mini chat interface */
+        .mini-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .mini-chat::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .mini-chat::-webkit-scrollbar-thumb {
+            background: rgba(102, 126, 234, 0.3);
+            border-radius: 2px;
+        }
+
+        .demo-message {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .demo-message.user {
+            flex-direction: row-reverse;
+        }
+
+        .demo-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .demo-avatar.bot {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .demo-avatar.user {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .demo-text {
+            background: white;
+            padding: 0.6rem 0.9rem;
+            border-radius: 12px;
+            max-width: 200px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .demo-message.user .demo-text {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+        }
+
+        .try-button {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .try-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        /* Animation delays for demo messages */
+        .demo-message:nth-child(1) { animation-delay: 0.2s; }
+        .demo-message:nth-child(2) { animation-delay: 0.6s; }
+        .demo-message:nth-child(3) { animation-delay: 1.0s; }
+        .demo-message:nth-child(4) { animation-delay: 1.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Prevent hover on mobile */
+        @media (hover: none) {
+            .bot-card:hover .bot-preview {
+                opacity: 0;
+            }
+            
+            .bot-card.mobile-preview .bot-preview {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .bot-icon {
@@ -589,6 +761,42 @@
             font-weight: 500;
         }
 
+        /* Mobile Landscape */
+        @media (max-height: 480px) and (orientation: landscape) {
+            .hero {
+                min-height: 80vh;
+            }
+            
+            .hero-content {
+                padding: 2rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav {
+                padding: 1rem 0;
+            }
+        }
+
+        /* Tablets */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .bots-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .about-content {
+                gap: 3rem;
+            }
+        }
+
+        /* Large Phones / Small Tablets */
         @media (max-width: 768px) {
             .container {
                 padding: 0 1rem;
@@ -598,20 +806,59 @@
                 flex-direction: column;
                 gap: 1rem;
                 text-align: center;
+                padding: 1rem 0;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .hero {
+                min-height: 90vh;
+            }
+            
+            .hero-content {
+                padding: 2rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
             }
             
             .hero-cta {
                 flex-direction: column;
                 align-items: center;
+                gap: 1rem;
             }
             
             .btn {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
+                padding: 1.2rem 2rem;
+                font-size: 1rem;
             }
             
             .bots-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .bot-card {
+                padding: 1.5rem;
+            }
+            
+            .bot-icon {
+                font-size: 2.5rem;
+            }
+            
+            .bot-title {
+                font-size: 1.3rem;
             }
             
             .about-content {
@@ -619,16 +866,22 @@
                 gap: 2rem;
             }
             
+            .demo-chat {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+            
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+                text-align: center;
             }
             
             .github-button {
-                top: 5rem;
+                top: 1rem;
                 right: 1rem;
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
+                padding: 0.75rem 1rem;
+                font-size: 0.85rem;
             }
             
             .github-button span {
@@ -636,11 +889,150 @@
             }
             
             .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
             }
             
             .stat-number {
                 font-size: 2rem;
+            }
+            
+            .stat-card {
+                padding: 1.5rem;
+            }
+            
+            .models-carousel {
+                margin: 2rem 0;
+            }
+            
+            .model-badge {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+                min-width: 120px;
+            }
+        }
+
+        /* Small Phones */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.75rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+                line-height: 1.1;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+                padding: 0 0.5rem;
+            }
+            
+            .btn {
+                max-width: 260px;
+                padding: 1rem 1.5rem;
+                font-size: 0.95rem;
+            }
+            
+            .bot-card {
+                padding: 1.25rem;
+            }
+            
+            .bot-icon {
+                font-size: 2rem;
+            }
+            
+            .bot-title {
+                font-size: 1.2rem;
+            }
+            
+            .bot-description {
+                font-size: 0.9rem;
+            }
+            
+            .feature-tag {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.6rem;
+            }
+            
+            .github-button {
+                top: 0.75rem;
+                right: 0.75rem;
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+            
+            .stat-card {
+                padding: 1.25rem;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            
+            .model-badge {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+                min-width: 100px;
+            }
+            
+            .point {
+                gap: 0.75rem;
+            }
+            
+            .point-icon {
+                font-size: 1.5rem;
+            }
+            
+            .about-description {
+                font-size: 1rem;
+            }
+        }
+
+        /* Very Small Phones */
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .btn {
+                max-width: 240px;
+                padding: 0.9rem 1.25rem;
+            }
+            
+            .bot-card {
+                padding: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .stat-card {
+                padding: 1rem;
+                text-align: center;
+            }
+            
+            .github-button {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.5rem;
+                width: auto;
+                min-width: auto;
+            }
+            
+            .github-button span {
+                display: none;
             }
         }
     </style>
@@ -702,62 +1094,222 @@
             <div class="bots-grid">
                 <!-- E-commerce Bot -->
                 <div class="bot-card" data-bot="ecommerce">
-                    <div class="bot-icon">
-                        <img src="assets/images/icons/database-storage.png" alt="Shopping" style="width: 48px; height: 48px;">
+                    <div class="bot-content">
+                        <div class="bot-icon">
+                            <img src="assets/images/icons/database-storage.png" alt="Shopping" style="width: 48px; height: 48px;">
+                        </div>
+                        <h3 class="bot-title">Shopping Assistant</h3>
+                        <p class="bot-description">Specialized for e-commerce queries, product recommendations, and order support</p>
+                        <div class="bot-features">
+                            <span class="feature-tag">Product Search</span>
+                            <span class="feature-tag">Order Tracking</span>
+                            <span class="feature-tag">Returns</span>
+                        </div>
+                        <a href="bots/ecommerce.html" class="bot-link">Try Shopping Bot →</a>
                     </div>
-                    <h3 class="bot-title">Shopping Assistant</h3>
-                    <p class="bot-description">Specialized for e-commerce queries, product recommendations, and order support</p>
-                    <div class="bot-features">
-                        <span class="feature-tag">Product Search</span>
-                        <span class="feature-tag">Order Tracking</span>
-                        <span class="feature-tag">Returns</span>
+                    
+                    <!-- Interactive Preview -->
+                    <div class="bot-preview">
+                        <div class="preview-header">
+                            <div class="preview-icon">🛍️</div>
+                            <div class="preview-title">Shopping Assistant Demo</div>
+                        </div>
+                        <div class="mini-chat">
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🛍️</div>
+                                <div class="demo-text">Hi! I can help you find products, track orders, and handle returns. What are you looking for today?</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">I need wireless headphones under $100</div>
+                            </div>
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🛍️</div>
+                                <div class="demo-text">Great! I found 3 highly-rated options: Sony WH-CH720N ($89), JBL Tune 760NC ($79), and Anker Soundcore Q30 ($69). Which features matter most to you?</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">Good battery life and noise canceling</div>
+                            </div>
+                        </div>
+                        <a href="bots/ecommerce.html" class="try-button">Try Shopping Assistant</a>
                     </div>
-                    <a href="bots/ecommerce.html" class="bot-link">Try Shopping Bot →</a>
                 </div>
 
                 <!-- Education Bot -->
                 <div class="bot-card" data-bot="education">
-                    <div class="bot-icon">
-                        <img src="assets/images/icons/graduation.png" alt="Education" style="width: 48px; height: 48px;">
+                    <div class="bot-content">
+                        <div class="bot-icon">
+                            <img src="assets/images/icons/graduation.png" alt="Education" style="width: 48px; height: 48px;">
+                        </div>
+                        <h3 class="bot-title">Academic Guide</h3>
+                        <p class="bot-description">Educational assistant with structured responses and rate limiting features</p>
+                        <div class="bot-features">
+                            <span class="feature-tag">Course Info</span>
+                            <span class="feature-tag">Admissions</span>
+                            <span class="feature-tag">Campus Life</span>
+                        </div>
+                        <a href="bots/education.html" class="bot-link">Try Academic Bot →</a>
                     </div>
-                    <h3 class="bot-title">Academic Guide</h3>
-                    <p class="bot-description">Educational assistant with structured responses and rate limiting features</p>
-                    <div class="bot-features">
-                        <span class="feature-tag">Course Info</span>
-                        <span class="feature-tag">Admissions</span>
-                        <span class="feature-tag">Campus Life</span>
+                    
+                    <!-- Interactive Preview -->
+                    <div class="bot-preview">
+                        <div class="preview-header">
+                            <div class="preview-icon">🎓</div>
+                            <div class="preview-title">Academic Guide Demo</div>
+                        </div>
+                        <div class="mini-chat">
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🎓</div>
+                                <div class="demo-text">Welcome! I can help with course information, admissions, and campus life. What would you like to know?</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">What are the requirements for Computer Science?</div>
+                            </div>
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🎓</div>
+                                <div class="demo-text">For CS admission you'll need: Math (Calculus), Physics, strong GPA (3.5+), and coding experience. Would you like specific course details or application deadlines?</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">Tell me about application deadlines</div>
+                            </div>
+                        </div>
+                        <a href="bots/education.html" class="try-button">Try Academic Guide</a>
                     </div>
-                    <a href="bots/education.html" class="bot-link">Try Academic Bot →</a>
                 </div>
 
                 <!-- Minimal Bot -->
                 <div class="bot-card" data-bot="minimal">
-                    <div class="bot-icon">
-                        <img src="assets/images/icons/bluechat.png" alt="Chat" style="width: 48px; height: 48px;">
+                    <div class="bot-content">
+                        <div class="bot-icon">
+                            <img src="assets/images/icons/bluechat.png" alt="Chat" style="width: 48px; height: 48px;">
+                        </div>
+                        <h3 class="bot-title">Quick Helper</h3>
+                        <p class="bot-description">Lightweight modal interface that doesn't disrupt your main content</p>
+                        <div class="bot-features">
+                            <span class="feature-tag">Minimal UI</span>
+                            <span class="feature-tag">Quick Replies</span>
+                            <span class="feature-tag">Modal Design</span>
+                        </div>
+                        <a href="bots/minimal.html" class="bot-link">Try Minimal Bot →</a>
                     </div>
-                    <h3 class="bot-title">Quick Helper</h3>
-                    <p class="bot-description">Lightweight modal interface that doesn't disrupt your main content</p>
-                    <div class="bot-features">
-                        <span class="feature-tag">Minimal UI</span>
-                        <span class="feature-tag">Quick Replies</span>
-                        <span class="feature-tag">Modal Design</span>
+                    
+                    <!-- Interactive Preview -->
+                    <div class="bot-preview">
+                        <div class="preview-header">
+                            <div class="preview-icon">💬</div>
+                            <div class="preview-title">Quick Helper Demo</div>
+                        </div>
+                        <div class="mini-chat">
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">💬</div>
+                                <div class="demo-text">Hi! I'm your quick helper. Ask me anything and I'll give you fast, concise answers!</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">What's the weather like?</div>
+                            </div>
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">💬</div>
+                                <div class="demo-text">I'd need your location to check! But I can help with quick questions, definitions, calculations, and more.</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">What's 15% of 240?</div>
+                            </div>
+                        </div>
+                        <a href="bots/minimal.html" class="try-button">Try Quick Helper</a>
                     </div>
-                    <a href="bots/minimal.html" class="bot-link">Try Minimal Bot →</a>
                 </div>
 
                 <!-- Foundation Bot -->
                 <div class="bot-card" data-bot="foundation">
-                    <div class="bot-icon">
-                        <img src="assets/images/icons/robot.png" alt="Robot" style="width: 48px; height: 48px;">
+                    <div class="bot-content">
+                        <div class="bot-icon">
+                            <img src="assets/images/icons/robot.png" alt="Robot" style="width: 48px; height: 48px;">
+                        </div>
+                        <h3 class="bot-title">Adaptive Assistant</h3>
+                        <p class="bot-description">Multi-personality bot that adapts its communication style to your needs</p>
+                        <div class="bot-features">
+                            <span class="feature-tag">Multi-Mode</span>
+                            <span class="feature-tag">Adaptable</span>
+                            <span class="feature-tag">Versatile</span>
+                        </div>
+                        <a href="bots/foundation.html" class="bot-link">Try Adaptive Bot →</a>
                     </div>
-                    <h3 class="bot-title">Adaptive Assistant</h3>
-                    <p class="bot-description">Multi-personality bot that adapts its communication style to your needs</p>
-                    <div class="bot-features">
-                        <span class="feature-tag">Multi-Mode</span>
-                        <span class="feature-tag">Adaptable</span>
-                        <span class="feature-tag">Versatile</span>
+                    
+                    <!-- Interactive Preview -->
+                    <div class="bot-preview">
+                        <div class="preview-header">
+                            <div class="preview-icon">🤖</div>
+                            <div class="preview-title">Adaptive Assistant Demo</div>
+                        </div>
+                        <div class="mini-chat">
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🤖</div>
+                                <div class="demo-text">Hello! I can adapt my style - formal for business, casual for friends, or technical for experts. How can I help?</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">I need help writing a business email</div>
+                            </div>
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🤖</div>
+                                <div class="demo-text">Certainly. I'll switch to professional mode. Please provide the email's purpose and recipient, and I'll help craft an appropriate message.</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">Actually, make it more casual</div>
+                            </div>
+                        </div>
+                        <a href="bots/foundation.html" class="try-button">Try Adaptive Assistant</a>
                     </div>
-                    <a href="bots/foundation.html" class="bot-link">Try Adaptive Bot →</a>
+                </div>
+
+                <!-- FixIt Pro Bot -->
+                <div class="bot-card" data-bot="fixit">
+                    <div class="bot-content">
+                        <div class="bot-icon">
+                            <span style="font-size: 48px;">🛠️</span>
+                        </div>
+                        <h3 class="bot-title">FixIt Pro</h3>
+                        <p class="bot-description">Expert DIY and home repair assistant with step-by-step guidance and safety tips</p>
+                        <div class="bot-features">
+                            <span class="feature-tag">DIY Guides</span>
+                            <span class="feature-tag">Tool Tips</span>
+                            <span class="feature-tag">Safety First</span>
+                        </div>
+                        <a href="bots/fixITbot.html" class="bot-link">Try FixIt Pro →</a>
+                    </div>
+                    
+                    <!-- Interactive Preview -->
+                    <div class="bot-preview">
+                        <div class="preview-header">
+                            <div class="preview-icon">🛠️</div>
+                            <div class="preview-title">FixIt Pro Demo</div>
+                        </div>
+                        <div class="mini-chat">
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🔧</div>
+                                <div class="demo-text">Hey there! I'm your DIY expert. I provide step-by-step repair guides, tool recommendations, and safety tips. What needs fixing?</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">My kitchen faucet is dripping</div>
+                            </div>
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🔧</div>
+                                <div class="demo-text">Easy fix! **Tools needed:** Adjustable wrench, screwdriver. **Step 1:** Turn off water supply under sink. **Safety:** Wear safety glasses. Want the full guide?</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">Yes, show me all steps</div>
+                            </div>
+                        </div>
+                        <a href="bots/fixITbot.html" class="try-button">Try FixIt Pro</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -872,7 +1424,7 @@
                         <div class="stat-label">AI Models</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">4</div>
+                        <div class="stat-number">5</div>
                         <div class="stat-label">Specialized Bots</div>
                     </div>
                     <div class="stat-card">
@@ -961,6 +1513,7 @@
                         <a href="bots/education.html">Academic Guide</a>
                         <a href="bots/minimal.html">Quick Helper</a>
                         <a href="bots/foundation.html">Adaptive Assistant</a>
+                        <a href="bots/fixITbot.html">FixIt Pro</a>
                     </div>
                     <div class="link-group">
                         <h4>About</h4>
@@ -1050,22 +1603,91 @@
             const botCards = document.querySelectorAll('.bot-card');
             
             botCards.forEach(card => {
+                // Enhanced hover effects
                 card.addEventListener('mouseenter', () => {
                     card.style.transform = 'translateY(-8px) scale(1.02)';
+                    // Start demo message animations
+                    const demoMessages = card.querySelectorAll('.demo-message');
+                    demoMessages.forEach((msg, index) => {
+                        setTimeout(() => {
+                            msg.style.opacity = '1';
+                            msg.style.transform = 'translateY(0)';
+                        }, index * 400 + 200);
+                    });
                 });
                 
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'translateY(0) scale(1)';
+                    // Reset demo message animations
+                    const demoMessages = card.querySelectorAll('.demo-message');
+                    demoMessages.forEach(msg => {
+                        msg.style.opacity = '0';
+                        msg.style.transform = 'translateY(20px)';
+                    });
                 });
 
+                // Mobile tap support for previews
                 card.addEventListener('click', (e) => {
-                    if (!e.target.classList.contains('bot-link')) {
+                    // Don't trigger preview if clicking on links or buttons
+                    if (e.target.classList.contains('bot-link') || 
+                        e.target.classList.contains('try-button') ||
+                        e.target.closest('.bot-link') || 
+                        e.target.closest('.try-button')) {
+                        return;
+                    }
+
+                    // On mobile, toggle preview on tap
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        card.classList.toggle('mobile-preview');
+                        
+                        // Animate demo messages for mobile
+                        if (card.classList.contains('mobile-preview')) {
+                            const demoMessages = card.querySelectorAll('.demo-message');
+                            demoMessages.forEach((msg, index) => {
+                                setTimeout(() => {
+                                    msg.style.opacity = '1';
+                                    msg.style.transform = 'translateY(0)';
+                                }, index * 300);
+                            });
+                        } else {
+                            const demoMessages = card.querySelectorAll('.demo-message');
+                            demoMessages.forEach(msg => {
+                                msg.style.opacity = '0';
+                                msg.style.transform = 'translateY(20px)';
+                            });
+                        }
+                    } else {
+                        // Desktop behavior - go to bot page
                         const link = card.querySelector('.bot-link');
                         if (link) {
                             window.location.href = link.href;
                         }
                     }
                 });
+
+                // Initialize demo message states
+                const demoMessages = card.querySelectorAll('.demo-message');
+                demoMessages.forEach(msg => {
+                    msg.style.opacity = '0';
+                    msg.style.transform = 'translateY(20px)';
+                    msg.style.transition = 'all 0.6s ease';
+                });
+            });
+
+            // Close mobile previews when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.bot-card')) {
+                    const mobileCards = document.querySelectorAll('.bot-card.mobile-preview');
+                    mobileCards.forEach(card => {
+                        card.classList.remove('mobile-preview');
+                        const demoMessages = card.querySelectorAll('.demo-message');
+                        demoMessages.forEach(msg => {
+                            msg.style.opacity = '0';
+                            msg.style.transform = 'translateY(20px)';
+                        });
+                    });
+                }
             });
         }
 
