@@ -4,6 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bot Playground - 11 Free AI Models | Llama 4, DeepSeek R1, Gemini 2.5 Pro</title>
+    
+    <!-- Enhanced Meta Tags -->
+    <meta name="description" content="Experience specialized AI chatbots built for different purposes. Try 6 unique bots powered by 11 cutting-edge AI models including Llama 4, DeepSeek R1, and Gemini 2.5 Pro - all free!">
+    <meta name="keywords" content="AI chatbot, free AI models, Llama 4, DeepSeek R1, Gemini 2.5 Pro, specialized chatbots, AI playground, conversational AI">
+    <meta name="author" content="Bot Playground">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="Bot Playground - 11 Free AI Models">
+    <meta property="og:description" content="Experience specialized AI chatbots built for different purposes. Try 6 unique bots powered by 11 cutting-edge AI models - all free!">
+    <meta property="og:image" content="https://your-domain.com/assets/images/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-domain.com/">
+    <meta property="twitter:title" content="Bot Playground - 11 Free AI Models">
+    <meta property="twitter:description" content="Experience specialized AI chatbots built for different purposes. Try 6 unique bots powered by 11 cutting-edge AI models - all free!">
+    <meta property="twitter:image" content="https://your-domain.com/assets/images/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/chaticon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/chaticon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/chaticon.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/icons.css" rel="stylesheet">
     <style>
@@ -50,6 +76,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            padding-top: 100px; /* Account for fixed navbar */
         }
 
         .hero-background {
@@ -105,17 +132,169 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 0;
-            position: relative;
-            z-index: 10;
+            padding: 1.5rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 1rem 0;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+        }
+
+        /* Burger Menu */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .burger-menu:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .burger-menu.active .burger-line:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .burger-menu.active .burger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.active .burger-line:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 200;
+            transition: left 0.3s ease;
+            padding: 2rem 1rem;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 150;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
             font-size: 1.5rem;
             font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .logo img {
+            width: 48px !important;
+            height: 48px !important;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .logo-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
         }
 
         .logo-icon {
@@ -124,7 +303,9 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
         .nav-link {
@@ -132,10 +313,14 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            white-space: nowrap;
         }
 
         .nav-link:hover {
             color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .hero-content {
@@ -147,7 +332,8 @@
             text-align: center;
             position: relative;
             z-index: 10;
-            padding: 4rem 0;
+            padding: 2rem 0;
+            min-height: calc(100vh - 120px);
         }
 
         .hero-title {
@@ -225,6 +411,7 @@
         .bots-section {
             padding: 6rem 0;
             position: relative;
+            scroll-margin-top: 100px; /* Account for fixed navbar */
         }
 
         .section-title {
@@ -273,6 +460,35 @@
 
         .bot-card.expanded {
             min-height: 500px;
+        }
+
+        /* Status Badge */
+        .status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 4;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .badge-free {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .badge-popular {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .badge-new {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
         }
 
         /* Bot card content layers */
@@ -467,10 +683,39 @@
         .feature-tag {
             background: rgba(102, 126, 234, 0.2);
             color: #a78bfa;
-            padding: 0.25rem 0.75rem;
+            padding: 0.4rem 0.9rem;
             border-radius: 20px;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             font-weight: 500;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .feature-tag:hover {
+            background: rgba(102, 126, 234, 0.3);
+            border-color: rgba(167, 139, 250, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .feature-tag.tag-search {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border-color: rgba(52, 211, 153, 0.3);
+        }
+
+        .feature-tag.tag-tracking {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .feature-tag.tag-support {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border-color: rgba(248, 113, 113, 0.3);
         }
 
         .bot-link {
@@ -487,6 +732,7 @@
         .about-section {
             padding: 6rem 0;
             background: var(--darker-bg);
+            scroll-margin-top: 100px;
         }
 
         .about-content {
@@ -632,22 +878,24 @@
         /* GitHub Button */
         .github-button {
             position: fixed;
-            top: 6rem;
+            bottom: 2rem;
             right: 2rem;
             z-index: 1000;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
+            gap: 0.4rem;
+            padding: 0.6rem 1.2rem;
             background: var(--purple-glow);
             color: white;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 25px;
             font-weight: 600;
-            font-size: 0.9rem;
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+            font-size: 0.8rem;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .github-button:hover {
@@ -657,8 +905,8 @@
         }
 
         .github-icon {
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             fill: currentColor;
         }
 
@@ -667,6 +915,7 @@
             padding: 4rem 0;
             background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
             overflow: hidden;
+            scroll-margin-top: 100px;
         }
 
         .models-carousel {
@@ -804,14 +1053,20 @@
             }
             
             .nav {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
                 padding: 1rem 0;
             }
-            
+
             .nav-links {
-                gap: 1.5rem;
+                display: none;
+            }
+
+            .burger-menu {
+                display: flex;
+            }
+
+            .logo img {
+                width: 36px !important;
+                height: 36px !important;
             }
             
             .hero {
@@ -852,6 +1107,14 @@
             
             .bot-card {
                 padding: 1.5rem;
+                min-height: 350px;
+            }
+
+            .status-badge {
+                top: 0.75rem;
+                right: 0.75rem;
+                font-size: 0.7rem;
+                padding: 0.2rem 0.6rem;
             }
             
             .bot-icon {
@@ -879,14 +1142,28 @@
             }
             
             .github-button {
-                top: 1rem;
+                bottom: 1rem;
                 right: 1rem;
-                padding: 0.75rem 1rem;
-                font-size: 0.85rem;
+                padding: 0.6rem;
+                font-size: 0;
+                gap: 0;
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+                min-height: 48px;
+                max-width: 48px;
+                max-height: 48px;
+                justify-content: center;
             }
             
             .github-button span {
                 display: none;
+            }
+
+            .github-icon {
+                width: 20px;
+                height: 20px;
             }
             
             .stats-grid {
@@ -957,10 +1234,20 @@
             }
             
             .github-button {
-                top: 0.75rem;
+                bottom: 0.75rem;
                 right: 0.75rem;
-                padding: 0.6rem 0.8rem;
-                font-size: 0.8rem;
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+                min-height: 44px;
+                max-width: 44px;
+                max-height: 44px;
+                padding: 0.5rem;
+            }
+
+            .github-icon {
+                width: 18px;
+                height: 18px;
             }
             
             .stats-grid {
@@ -1058,15 +1345,21 @@
         <div class="container">
             <header class="nav">
                 <div class="logo">
-                    <img src="assets/images/bot.png" alt="Bot Playground" style="width: 32px; height: 32px;">
-
+                    <img src="assets/images/bot.png" alt="Bot Playground Logo">
+                    <span class="logo-text">Bot Playground</span>
                 </div>
                 <nav class="nav-links">
                     <a href="#bots" class="nav-link">Explore Bots</a>
                     <a href="#models" class="nav-link">AI Models</a>
+                    <a href="analytics.html" class="nav-link">📊 Analytics</a>
                     <a href="icon-gallery.html" class="nav-link">Icon Gallery</a>
                     <a href="#about" class="nav-link">About</a>
                 </nav>
+                <div class="burger-menu" id="burger-menu">
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                    <div class="burger-line"></div>
+                </div>
             </header>
             
             <div class="hero-content">
@@ -1086,6 +1379,24 @@
         </div>
     </section>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="assets/images/bot.png" alt="Bot Playground" style="width: 32px; height: 32px;">
+                <span>Menu</span>
+            </div>
+        </div>
+        <nav class="mobile-nav-links">
+            <a href="#bots" class="mobile-nav-link">🤖 Explore Bots</a>
+            <a href="#models" class="mobile-nav-link">⚡ AI Models</a>
+            <a href="analytics.html" class="mobile-nav-link">📊 Analytics</a>
+            <a href="icon-gallery.html" class="mobile-nav-link">🎨 Icon Gallery</a>
+            <a href="#about" class="mobile-nav-link">ℹ️ About</a>
+        </nav>
+    </div>
+
     <!-- Bot Preview Section -->
     <section id="bots" class="bots-section">
         <div class="container">
@@ -1095,6 +1406,7 @@
             <div class="bots-grid">
                 <!-- E-commerce Bot -->
                 <div class="bot-card" data-bot="ecommerce">
+                    <div class="status-badge badge-popular">🔥 Popular</div>
                     <div class="bot-content">
                         <div class="bot-icon">
                             <img src="assets/images/icons/database-storage.png" alt="Shopping" style="width: 48px; height: 48px;">
@@ -1102,9 +1414,9 @@
                         <h3 class="bot-title">Shopping Assistant</h3>
                         <p class="bot-description">Specialized for e-commerce queries, product recommendations, and order support</p>
                         <div class="bot-features">
-                            <span class="feature-tag">Product Search</span>
-                            <span class="feature-tag">Order Tracking</span>
-                            <span class="feature-tag">Returns</span>
+                            <span class="feature-tag tag-search">🔍 Product Search</span>
+                            <span class="feature-tag tag-tracking">📦 Order Tracking</span>
+                            <span class="feature-tag tag-support">↩️ Returns</span>
                         </div>
                         <a href="bots/ecommerce.html" class="bot-link">Try Shopping Bot →</a>
                     </div>
@@ -1139,6 +1451,7 @@
 
                 <!-- Education Bot -->
                 <div class="bot-card" data-bot="education">
+                    <div class="status-badge badge-free">🆓 Free</div>
                     <div class="bot-content">
                         <div class="bot-icon">
                             <img src="assets/images/icons/graduation.png" alt="Education" style="width: 48px; height: 48px;">
@@ -1146,9 +1459,9 @@
                         <h3 class="bot-title">Academic Guide</h3>
                         <p class="bot-description">Educational assistant with structured responses and rate limiting features</p>
                         <div class="bot-features">
-                            <span class="feature-tag">Course Info</span>
-                            <span class="feature-tag">Admissions</span>
-                            <span class="feature-tag">Campus Life</span>
+                            <span class="feature-tag">📚 Course Info</span>
+                            <span class="feature-tag">🎓 Admissions</span>
+                            <span class="feature-tag">🏫 Campus Life</span>
                         </div>
                         <a href="bots/education.html" class="bot-link">Try Academic Bot →</a>
                     </div>
@@ -1183,6 +1496,7 @@
 
                 <!-- Minimal Bot -->
                 <div class="bot-card" data-bot="minimal">
+                    <div class="status-badge badge-free">🆓 Free</div>
                     <div class="bot-content">
                         <div class="bot-icon">
                             <img src="assets/images/icons/bluechat.png" alt="Chat" style="width: 48px; height: 48px;">
@@ -1190,9 +1504,9 @@
                         <h3 class="bot-title">Quick Helper</h3>
                         <p class="bot-description">Lightweight modal interface that doesn't disrupt your main content</p>
                         <div class="bot-features">
-                            <span class="feature-tag">Minimal UI</span>
-                            <span class="feature-tag">Quick Replies</span>
-                            <span class="feature-tag">Modal Design</span>
+                            <span class="feature-tag">⚡ Minimal UI</span>
+                            <span class="feature-tag">💬 Quick Replies</span>
+                            <span class="feature-tag">🪟 Modal Design</span>
                         </div>
                         <a href="bots/minimal.html" class="bot-link">Try Minimal Bot →</a>
                     </div>
@@ -1227,6 +1541,7 @@
 
                 <!-- Foundation Bot -->
                 <div class="bot-card" data-bot="foundation">
+                    <div class="status-badge badge-free">🆓 Free</div>
                     <div class="bot-content">
                         <div class="bot-icon">
                             <img src="assets/images/icons/robot.png" alt="Robot" style="width: 48px; height: 48px;">
@@ -1234,9 +1549,9 @@
                         <h3 class="bot-title">Adaptive Assistant</h3>
                         <p class="bot-description">Multi-personality bot that adapts its communication style to your needs</p>
                         <div class="bot-features">
-                            <span class="feature-tag">Multi-Mode</span>
-                            <span class="feature-tag">Adaptable</span>
-                            <span class="feature-tag">Versatile</span>
+                            <span class="feature-tag">🔄 Multi-Mode</span>
+                            <span class="feature-tag">🎯 Adaptable</span>
+                            <span class="feature-tag">🔧 Versatile</span>
                         </div>
                         <a href="bots/foundation.html" class="bot-link">Try Adaptive Bot →</a>
                     </div>
@@ -1269,8 +1584,54 @@
                     </div>
                 </div>
 
+                <!-- TravelBot -->
+                <div class="bot-card" data-bot="travel">
+                    <div class="status-badge badge-new">✨ New</div>
+                    <div class="bot-content">
+                        <div class="bot-icon">
+                            <span style="font-size: 48px;">🌍</span>
+                        </div>
+                        <h3 class="bot-title">TravelBot</h3>
+                        <p class="bot-description">Your AI travel companion for planning amazing journeys, budgets, and discovering hidden gems</p>
+                        <div class="bot-features">
+                            <span class="feature-tag">🗺️ Trip Planning</span>
+                            <span class="feature-tag">💰 Budget Calculator</span>
+                            <span class="feature-tag">💡 Local Tips</span>
+                        </div>
+                        <a href="bots/travel.html" class="bot-link">Try TravelBot →</a>
+                    </div>
+                    
+                    <!-- Interactive Preview -->
+                    <div class="bot-preview">
+                        <div class="preview-header">
+                            <div class="preview-icon">🧳</div>
+                            <div class="preview-title">TravelBot Demo</div>
+                        </div>
+                        <div class="mini-chat">
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🌍</div>
+                                <div class="demo-text">🧳 Ready to explore the world? I can help you plan trips, create budgets, find hidden gems, and learn local customs. Where shall we go?</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">Plan a 5-day trip to Japan for $2000</div>
+                            </div>
+                            <div class="demo-message bot">
+                                <div class="demo-avatar bot">🌍</div>
+                                <div class="demo-text">🇯🇵 Perfect! Here's your 5-day Japan itinerary: <strong>Days 1-2:</strong> Tokyo (Shibuya, Senso-ji) <strong>Days 3-4:</strong> Kyoto (Fushimi, Arashiyama) <strong>Day 5:</strong> Mount Fuji day trip. <strong>Budget:</strong> $1,800 total. Want details?</div>
+                            </div>
+                            <div class="demo-message user">
+                                <div class="demo-avatar user">👤</div>
+                                <div class="demo-text">Show me the budget breakdown</div>
+                            </div>
+                        </div>
+                        <a href="bots/travel.html" class="try-button">Try TravelBot</a>
+                    </div>
+                </div>
+
                 <!-- FixIt Pro Bot -->
                 <div class="bot-card" data-bot="fixit">
+                    <div class="status-badge badge-new">✨ New</div>
                     <div class="bot-content">
                         <div class="bot-icon">
                             <span style="font-size: 48px;">🛠️</span>
@@ -1278,9 +1639,9 @@
                         <h3 class="bot-title">FixIt Pro</h3>
                         <p class="bot-description">Expert DIY and home repair assistant with step-by-step guidance and safety tips</p>
                         <div class="bot-features">
-                            <span class="feature-tag">DIY Guides</span>
-                            <span class="feature-tag">Tool Tips</span>
-                            <span class="feature-tag">Safety First</span>
+                            <span class="feature-tag">📋 DIY Guides</span>
+                            <span class="feature-tag">🔧 Tool Tips</span>
+                            <span class="feature-tag">⚠️ Safety First</span>
                         </div>
                         <a href="bots/fixITbot.html" class="bot-link">Try FixIt Pro →</a>
                     </div>
@@ -1302,7 +1663,7 @@
                             </div>
                             <div class="demo-message bot">
                                 <div class="demo-avatar bot">🔧</div>
-                                <div class="demo-text">Easy fix! **Tools needed:** Adjustable wrench, screwdriver. **Step 1:** Turn off water supply under sink. **Safety:** Wear safety glasses. Want the full guide?</div>
+                                <div class="demo-text">Easy fix! <strong>Tools needed:</strong> Adjustable wrench, screwdriver. <strong>Step 1:</strong> Turn off water supply under sink. <strong>Safety:</strong> Wear safety glasses. Want the full guide?</div>
                             </div>
                             <div class="demo-message user">
                                 <div class="demo-avatar user">👤</div>
@@ -1514,6 +1875,7 @@
                         <a href="bots/education.html">Academic Guide</a>
                         <a href="bots/minimal.html">Quick Helper</a>
                         <a href="bots/foundation.html">Adaptive Assistant</a>
+                        <a href="bots/travel.html">TravelBot</a>
                         <a href="bots/fixITbot.html">FixIt Pro</a>
                     </div>
                     <div class="link-group">
@@ -1715,5 +2077,9 @@
             });
         }
     </script>
+
+    <!-- Enhanced UI JavaScript -->
+    <script src="assets/js/enhancements.js"></script>
+    <script src="assets/js/theme-switcher.js"></script>
 </body>
 </html>

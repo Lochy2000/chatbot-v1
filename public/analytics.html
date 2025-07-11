@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Analytics Dashboard - Bot Playground</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/icons.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050508;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .back-btn {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .dashboard {
+            padding: 3rem 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .metric-icon {
+            font-size: 2rem;
+        }
+
+        .metric-trend {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .trend-up {
+            background: var(--success-gradient);
+            color: white;
+        }
+
+        .trend-down {
+            background: var(--warning-gradient);
+            color: white;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .metric-card {
+                padding: 1.5rem;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="assets/images/bot.png" alt="Bot Playground">
+                    <span>Analytics Dashboard</span>
+                </div>
+                <a href="index.html" class="back-btn">← Back to Playground</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <div class="container">
+            <h1 class="page-title">Bot Analytics Dashboard</h1>
+            <p class="page-subtitle">Real-time insights into bot performance and user engagement</p>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">👥</div>
+                        <div class="metric-trend trend-up">↗ +15%</div>
+                    </div>
+                    <div class="metric-value" data-count="2847">0</div>
+                    <div class="metric-label">Total Conversations</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">🤖</div>
+                        <div class="metric-trend trend-up">↗ +8%</div>
+                    </div>
+                    <div class="metric-value" data-count="6">0</div>
+                    <div class="metric-label">Active Bots</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">⚡</div>
+                        <div class="metric-trend trend-up">↗ +23%</div>
+                    </div>
+                    <div class="metric-value" data-count="11">0</div>
+                    <div class="metric-label">AI Models</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">📊</div>
+                        <div class="metric-trend trend-up">↗ +31%</div>
+                    </div>
+                    <div class="metric-value" data-count="94">0</div>
+                    <div class="metric-label">Satisfaction Rate (%)</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Animated counter functionality
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-count]');
+            
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    // Handle decimal numbers
+                    if (target < 10 && target % 1 !== 0) {
+                        counter.textContent = current.toFixed(1);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 16);
+            });
+        }
+
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(animateCounters, 500);
+        });
+    </script>
+</body>
+</html>

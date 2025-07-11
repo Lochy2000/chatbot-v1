@@ -1,6 +1,3 @@
-
-![chatty bot](https://github.com/user-attachments/assets/3f9d7f4d-6e1c-48f8-95fa-62b4101ba0d1)
-
 # Bot Playground
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=vercel)](https://your-deployed-url.vercel.app)
@@ -9,16 +6,17 @@
 [![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini-orange?style=for-the-badge&logo=google)](https://ai.google.dev/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-> **An interactive demonstration site showcasing different types of AI chatbots designed for specific use cases.**
+> **An interactive demonstration site showcasing different types of AI chatbots designed for specific use cases. Experience how specialized chatbots work better than generic ones with 6 unique bots powered by 11 cutting-edge AI models.**
 
+![Bot Playground Screenshot](https://github.com/user-attachments/assets/3f9d7f4d-6e1c-48f8-95fa-62b4101ba0d1)
 
 ---
 
-## **Why This Project Matters**
+## Why This Project Matters
 
 Most websites use generic chatbots that try to handle everything. But different types of businesses have different visitor needs. This project explores how **specialized chatbots** can work better than generic ones by focusing on specific business contexts and user expectations.
 
-### **Key Benefits of Specialized Bots**
+### Key Benefits of Specialized Bots
 - **Context Understanding**: Domain-specific knowledge and responses
 - **Better UX**: Users get relevant answers faster
 - **Purpose-Built Design**: Interface matches the intended use case
@@ -26,19 +24,39 @@ Most websites use generic chatbots that try to handle everything. But different 
 
 ---
 
-## **Bot Collection**
+## Bot Collection
 
-| Bot | Icon | Purpose | Key Features |
-|-----|------|---------|--------------|
-| **Shopping Assistant** | ![Shopping](public/assets/images/icons/bluechat.png) | E-commerce focused chatbot | Product search, Order tracking, Returns |
-| **Academic Guide** | ![Education](public/assets/images/icons/graduation.png) | Educational institution bot | Course info, Admissions, Campus life, Rate limiting |
-| **Quick Helper** | ![Chat](public/assets/images/icons/message.png) | Lightweight modal interface | Minimal UI, Quick replies, Non-disruptive |
-| **Adaptive Assistant** | ![Robot](public/assets/images/icons/robot.png) | Multi-personality bot | Adaptable responses, Multiple modes, Versatile |
-| **MORE ON THERE WAY** | ![image](https://github.com/user-attachments/assets/591990cf-5c9d-4ec6-b5ac-e13efda3a80c) | |  |
+| Bot | Purpose | Key Features | Status |
+|-----|---------|--------------|--------|
+| **Shopping Assistant** | E-commerce focused chatbot | 🔍 Product Search, 📦 Order Tracking, ↩️ Returns | 🔥 Popular |
+| **Academic Guide** | Educational institution bot | 📚 Course Info, 🎓 Admissions, 🏫 Campus Life | 🆓 Free |
+| **Quick Helper** | Lightweight modal interface | ⚡ Minimal UI, 💬 Quick Replies, 🪟 Modal Design | 🆓 Free |
+| **Adaptive Assistant** | Multi-personality bot | 🔄 Multi-Mode, 🎯 Adaptable, 🔧 Versatile | 🆓 Free |
+| **TravelBot** | AI travel companion | 🗺️ Trip Planning, 💰 Budget Calculator, 💡 Local Tips | ✨ New |
+| **FixIt Pro** | DIY and home repair assistant | 📋 DIY Guides, 🔧 Tool Tips, ⚠️ Safety First | ✨ New |
 
 ---
 
-## 🚀 **Quick Start**
+## Features
+
+### Core Features
+- **6 Specialized Bots**: Each designed for specific use cases
+- **11 AI Models**: Including Llama 4, DeepSeek R1, Gemini 2.5 Pro
+- **Interactive Previews**: Hover over bot cards to see demos
+- **Analytics Dashboard**: Real-time performance metrics
+- **Dark/Light Themes**: Seamless theme switching
+- **Mobile Optimized**: Responsive design for all devices
+
+### Recent Enhancements
+- **Sticky Navigation**: Navbar follows you as you scroll with subtle glow effects
+- **Enhanced Bot Cards**: Status badges (Popular, Free, New) and interactive previews
+- **Theme Switcher**: Bottom-right theme toggle with smooth transitions
+- **GitHub Integration**: Easy access to source code
+- **Performance Optimized**: Streamlined codebase with deprecated code removed
+
+---
+
+## Quick Start
 
 ### Prerequisites
 - Node.js 18.x or higher
@@ -48,7 +66,7 @@ Most websites use generic chatbots that try to handle everything. But different 
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Lochy2000/chatbot-v1.git
    cd chatbot-v1
    ```
 
@@ -72,63 +90,77 @@ Most websites use generic chatbots that try to handle everything. But different 
    ```
    Visit `http://localhost:8000` to see the site
 
-### **Deployment**
+### Deployment
 
 Deploy to Vercel in 3 clicks:
 
-1. [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=your-repo-url)
+1. [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Lochy2000/chatbot-v1)
 2. Set `GEMINI_API_KEY` environment variable in Vercel dashboard
-3. Deploy! 
+3. Deploy!
+
 ---
 
-## 📁 **Project Structure**
+## Project Structure
 
 ```
- Bot Playground
-├── 📄 README.md                 # You are here!
+Bot Playground
+├── 📄 README.md                 # Project overview
 ├── 📄 package.json              # Dependencies and scripts
 ├── 📄 vercel.json              # Vercel deployment config
 ├── 📄 .env.example             # Environment template
 │
+├── 📁 documentation/            # Project documentation
+│   ├── 📄 deprecated.md        # Deprecated code documentation
+│   ├── 📄 ARCHITECTURE.md      # System architecture
+│   ├── 📄 DEVELOPMENT.md       # Development guide
+│   └── 📄 DEPLOY.md            # Deployment instructions
+│
 ├── 📁 public/                   # Frontend files
 │   ├── 📄 index.html           # Landing page
+│   ├── 📄 analytics.html       # Analytics dashboard
+│   ├── 📄 icon-gallery.html    # Icon showcase
 │   │
 │   ├── 📁 assets/              # Static resources
 │   │   ├── 📁 css/             # Stylesheets
-│   │   ├── 📁 js/              # JavaScript files
-│   │   └── 📁 images/          
-│   │       └── 📁 icons/       # 3D Icons (25+ available)
-│   │           ├── robot.png
-│   │           ├── graduation.png
-│   │           ├── bluechat.png
-│   │           ├── database-storage.png
-│   │           └── ... (20+ more icons)
+│   │   │   ├── icons.css       # Icon utilities
+│   │   │   └── model-selector.css # Bot page styling
+│   │   ├── 📁 js/              # JavaScript modules
+│   │   │   ├── enhancements.js # Core UI enhancements
+│   │   │   ├── theme-switcher.js # Theme toggle
+│   │   │   ├── model-selector.js # AI model selection
+│   │   │   └── deprecated/     # Archived code
+│   │   └── 📁 images/          # Assets and icons
+│   │       ├── bot.png         # Main logo
+│   │       ├── chaticon.png    # Alternative logo
+│   │       └── 📁 icons/       # 25+ 3D icons
 │   │
 │   └── 📁 bots/                # Individual bot pages
-│       ├── ecommerce.html   # Shopping Assistant
-│       ├── education.html   # Academic Guide 
-│       ├── minimal.html     # Quick Helper
-│       └── foundation.html  # Adaptive Assistant
+│       ├── ecommerce.html      # Shopping Assistant
+│       ├── education.html      # Academic Guide
+│       ├── minimal.html        # Quick Helper
+│       ├── foundation.html     # Adaptive Assistant
+│       ├── travel.html         # TravelBot
+│       └── fixITbot.html       # FixIt Pro
 │
 ├── 📁 api/                     # Backend API
-│   ├── 📄 chat.js             #  Main Gemini API endpoint
-│   └── 📄 quote.js            # Additional API endpoint
+│   ├── 📄 chat.js             # Main Gemini API endpoint
+│   └── 📄 quote.js            # Additional functionality
 │
 └── 📁 node_modules/           # Dependencies
 ```
 
 ---
 
-##  **Technology Stack**
+## Technology Stack
 
 ### Frontend
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 
-- **HTML5**: Semantic markup and structure
-- **CSS3**: Modern styling with gradients, animations, glassmorphism
-- **Vanilla JavaScript**: No frameworks, pure performance
+- **HTML5**: Semantic markup and modern structure
+- **CSS3**: Glassmorphism, gradients, animations, responsive design
+- **Vanilla JavaScript**: ES6+ modules, no frameworks for optimal performance
 
 ### Backend
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
@@ -140,34 +172,13 @@ Deploy to Vercel in 3 clicks:
 ### AI Integration
 ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=flat-square&logo=google&logoColor=white)
 
-- **Google Gemini Pro**: Advanced language model
+- **11 AI Models**: Gemini 1.5 Flash/Pro, Llama 4 Scout/Maverick, DeepSeek V3/R1, and more
 - **Token tracking**: Monitor usage and costs
-- **Specialized prompting**: Domain-specific instructions
+- **Specialized prompting**: Domain-specific instructions for each bot
 
 ---
 
-## 🎨 **Design Features**
-
-### Visual Elements
-- **Gradient Backgrounds**: Modern, vibrant aesthetics
-- **Glassmorphism**: Translucent UI elements with backdrop blur
-- **Smooth Animations**: Floating orbs, message transitions
-- **Responsive Design**: Mobile-first approach
-
-### User Experience
-- **Fast Loading**: Optimized assets and minimal dependencies
-- **Intuitive Navigation**: Clear call-to-actions and flow
-- **Real-time Chat**: Instant responses with typing indicators
-- **Progressive Enhancement**: Works without JavaScript (fallbacks)
-
-### Accessibility
-- **WCAG Compliant**: Proper contrast ratios and semantic HTML
-- **Keyboard Navigation**: Full keyboard support
-- **Screen Reader Friendly**: ARIA labels and descriptions
-
----
-
-## 🔧 **Development**
+## Development
 
 ### Available Scripts
 
@@ -176,9 +187,9 @@ Deploy to Vercel in 3 clicks:
 npm run dev
 
 # Start development server (Node.js alternative)
-npm run dev-node
+npm run dev:serve
 
-# Build project (no build step needed)
+# Build project (static files ready)
 npm run build
 
 # Start production server
@@ -200,163 +211,190 @@ npm start
 
 ---
 
-##  **Bot-Specific Features**
+## Design Features
 
-###  Shopping Assistant
-- **Product-focused prompts**: E-commerce terminology and context
-- **Visual design**: Shopping-themed gradients and icons
-- **Features**: Product search, order tracking, returns handling
+### Visual Elements
+- **Glassmorphism Design**: Translucent UI elements with backdrop blur
+- **Dynamic Gradients**: Modern, vibrant color schemes
+- **Smooth Animations**: Floating orbs, ripple effects, counter animations
+- **Status Badges**: Visual indicators for bot popularity and availability
+- **Interactive Previews**: Hover demos for each bot
 
-###  Academic Guide (Newly Completed!)
-- **Educational prompts**: Course, admission, and campus information
-- **Rate limiting**: Demonstrates usage controls (10 messages/session)
-- **Token tracking**: Real-time usage monitoring
-- **Quick actions**: Pre-defined common questions
-- **Structured responses**: Organized with headings and bullet points
+### User Experience
+- **Sticky Navigation**: Fixed navbar with scroll effects and subtle glow
+- **Theme Switching**: Dark/light mode toggle with smooth transitions
+- **Mobile-First**: Optimized touch interactions and responsive design
+- **Real-time Chat**: Instant responses with typing indicators
+- **Analytics Dashboard**: Performance metrics and usage insights
 
-###  Quick Helper
+### Accessibility
+- **WCAG Compliant**: Proper contrast ratios and semantic HTML
+- **Keyboard Navigation**: Full keyboard support with focus management
+- **Screen Reader Friendly**: ARIA labels and descriptions
+
+---
+
+## Bot-Specific Features
+
+### Shopping Assistant (Popular)
+- **E-commerce Focus**: Product search, order tracking, returns handling
+- **Shopping Theme**: Commerce-specific gradients and icons
+- **Interactive Demo**: Product recommendation simulation
+
+### Academic Guide (Free)
+- **Educational Prompts**: Course info, admissions, campus life
+- **Rate Limiting**: Usage controls (10 messages/session)
+- **Structured Responses**: Organized with headings and bullet points
+
+### Quick Helper (Free)
 - **Minimal UI**: Modal-based, non-disruptive design
-- **Fast responses**: Optimized for quick interactions
+- **Fast Responses**: Optimized for quick interactions
 - **Lightweight**: Minimal resource usage
 
-###  Adaptive Assistant
+### Adaptive Assistant (Free)
 - **Multi-personality**: Adapts communication style
-- **Versatile responses**: Handles various conversation types
-- **Dynamic behavior**: Changes based on user interaction
+- **Versatile Responses**: Handles various conversation types
+- **Dynamic Behavior**: Changes based on user interaction
+
+### TravelBot (New)
+- **Trip Planning**: Complete itinerary creation
+- **Budget Calculator**: Cost estimation and breakdown
+- **Local Insights**: Hidden gems and cultural tips
+
+### FixIt Pro (New)
+- **DIY Guides**: Step-by-step repair instructions
+- **Tool Recommendations**: Specific tool suggestions
+- **Safety First**: Comprehensive safety guidelines
 
 ---
 
-##  **Use Cases & Applications**
-
-### Business Applications
-- **Corporate Websites**: Department-specific assistance
-- **E-commerce Sites**: Product support and sales
-- **Educational Institutions**: Student services and information
-- **Healthcare**: Appointment scheduling and basic info
-- **Financial Services**: Account support and guidance
-
-### Technical Applications
-- **A/B Testing**: Compare specialized vs generic bots
-- **Analytics**: Track engagement and effectiveness
-- **Design Research**: UI/UX optimization for different contexts
-- **AI Research**: Prompt engineering and specialization
-
----
-
-## 📈 **Performance Metrics**
+## Performance Metrics
 
 ### Optimization Features
-- **Bundle Size**: < 50KB total JavaScript
-- **Load Time**: < 2s initial page load
-- **API Response**: < 3s average response time
-- **Mobile Score**: 95+ Lighthouse performance
+- **Bundle Size**: Optimized JavaScript loading
+- **Load Time**: Fast initial page rendering
+- **API Response**: Efficient AI model integration
+- **Mobile Score**: High Lighthouse performance ratings
 
 ### Analytics Ready
-- Token usage tracking
-- Response time monitoring
-- User interaction metrics
-- Conversion rate optimization
+- **Real-time Metrics**: Bot usage and performance tracking
+- **Response Monitoring**: API response times and success rates
+- **User Engagement**: Interaction patterns and conversion rates
 
 ---
 
-## 🤝 **Contributing**
+## Contributing
 
 We welcome contributions! Here's how to get started:
 
 1. **Fork the repository**
 2. **Create a feature branch**: `git checkout -b feature/amazing-bot`
 3. **Make your changes**: Add new bots or improve existing ones
-4. **Test thoroughly**: Ensure all bots work correctly
-5. **Update documentation**: Keep README.md current
+4. **Test thoroughly**: Ensure all functionality works correctly
+5. **Update documentation**: Keep all docs current
 6. **Submit a pull request**: Describe your changes clearly
 
-### 🎨 **Using the Icon Collection**
+### Using the Icon Collection
 
-The project includes 25+ high-quality 3D icons in `public/assets/images/icons/`:
+The project includes 25+ high-quality 3D icons:
 
 ```html
 <!-- Use in HTML -->
-<img src="/public/assets/images/icons/robot.png" alt="Robot" width="32" height="32">
+<img src="assets/images/icons/robot.png" alt="Robot" width="48" height="48">
 
 <!-- Use in CSS -->
 .icon-robot {
-    background-image: url('/public/assets/images/icons/robot.png');
+    background-image: url('assets/images/icons/robot.png');
 }
 ```
 
-**Available Icons**: robot, graduation, bluechat, greenchat, message, ai-chip, database-storage, diploma-cert, flask-lab-blue, flask-lab-red, lightbulb, security, phone, and many more!
+**Available Icons**: robot, graduation, bluechat, database-storage, flask-lab-blue, lightbulb, security, and many more!
 
 ---
 
-## 📋 **Roadmap**
+## Documentation
+
+- [Architecture Guide](documentation/ARCHITECTURE.md) - System design and structure
+- [Development Guide](documentation/DEVELOPMENT.md) - Setup and development workflow
+- [Deployment Guide](documentation/DEPLOY.md) - Production deployment instructions
+- [Deprecated Code](documentation/deprecated.md) - Archived code documentation
+
+---
+
+## Roadmap
+
+### Completed Recently
+- ✅ Analytics dashboard with real-time metrics
+- ✅ Dark/light theme switching
+- ✅ Enhanced bot card interactions
+- ✅ Sticky navigation with scroll effects
+- ✅ Mobile optimization improvements
+- ✅ Code cleanup and performance optimization
 
 ### In Progress
-- [ ] Advanced analytics dashboard
-- [ ] Custom bot builder interface
-- [ ] Multi-language support
+- 🚧 Advanced bot comparison features
+- 🚧 Custom bot builder interface
+- 🚧 Multi-language support
 
 ### Planned Features
-- [ ] Voice chat integration
-- [ ] Bot performance comparisons
-- [ ] Custom theming system
-- [ ] Plugin architecture
-- [ ] Advanced rate limiting options
-
-### Future Ideas
-- [ ] Integration with other AI providers (OpenAI, Claude, etc.)
-- [ ] Bot marketplace
-- [ ] Advanced prompt templates
-- [ ] Real-time collaboration features
+- 📋 Voice chat integration
+- 📋 Enhanced analytics with A/B testing
+- 📋 Custom theming system
+- 📋 Plugin architecture
+- 📋 Progressive Web App (PWA) capabilities
 
 ---
 
-## **Troubleshooting**
+## Troubleshooting
 
 ### Common Issues
 
-**❓ Bot responses show "Local Development Mode"**
+**Bot responses show "Local Development Mode"**
 - Ensure you've deployed to Vercel or configured the API properly
 - Check that `GEMINI_API_KEY` is set in your environment
 
-**❓ Icons not loading**
-- Verify paths are correct: `/public/assets/images/icons/icon-name.png`
+**Icons not loading**
+- Verify paths are correct: `assets/images/icons/icon-name.png`
 - Check that files exist in the icons directory
 
-**❓ Rate limiting not working**
-- This is browser-based and resets on page refresh
-- For production, implement server-side rate limiting
+**Theme switcher not visible**
+- Ensure JavaScript is enabled
+- Check browser console for any errors
+
+**Navigation items cut off**
+- Recent update improved spacing - refresh the page
+- Check viewport width on mobile devices
 
 ---
 
-## 📄 **License**
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🙏 **Acknowledgments**
+## Acknowledgments
 
-- **Google Gemini**: For providing the AI capabilities
+- **Google Gemini**: For providing advanced AI capabilities
 - **Vercel**: For seamless deployment and hosting
-- **Icon Design**: 3D icons from various creative sources
-- **Community**: For feedback and contributions
+- **Icon Design**: High-quality 3D icons from various creative sources
+- **Community**: For feedback, contributions, and suggestions
 
 ---
 
-## 📞 **Support & Contact**
+## Support & Contact
 
-- **ssues**: [GitHub Issues](https://github.com/your-username/bot-playground/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/bot-playground/discussions)
-- **Email**: your-email@example.com
+- **Issues**: [GitHub Issues](https://github.com/Lochy2000/chatbot-v1/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Lochy2000/chatbot-v1/discussions)
+- **Repository**: [GitHub Repository](https://github.com/Lochy2000/chatbot-v1)
 
 ---
 
 <div align="center">
 
-**🌟 Star this repo if you found it helpful!**
+**⭐ Star this repo if you found it helpful!**
 
-[![GitHub stars](https://img.shields.io/github/stars/your-username/bot-playground?style=social)](https://github.com/your-username/bot-playground/stargazers)
-[![Twitter Follow](https://img.shields.io/twitter/follow/your-twitter?style=social)](https://twitter.com/your-twitter)
+[![GitHub stars](https://img.shields.io/github/stars/Lochy2000/chatbot-v1?style=social)](https://github.com/Lochy2000/chatbot-v1/stargazers)
 
 ---
 

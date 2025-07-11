@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelBot - Your AI Travel Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../assets/css/model-selector.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Animated World Map Background */
+        .travel-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.1)"><animate attributeName="opacity" values="0.1;0.3;0.1" dur="4s" repeatCount="indefinite"/></circle><circle cx="150" cy="80" r="2" fill="rgba(255,255,255,0.15)"><animate attributeName="opacity" values="0.15;0.4;0.15" dur="6s" repeatCount="indefinite"/></circle><circle cx="80" cy="150" r="2.5" fill="rgba(255,255,255,0.12)"><animate attributeName="opacity" values="0.12;0.35;0.12" dur="5s" repeatCount="indefinite"/></circle></svg>') repeat,
+                linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+            background-size: 100px 100px, 200px 200px;            animation: worldFloat 25s ease-in-out infinite, shimmer 8s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes worldFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-15px) rotate(1deg); }
+            66% { transform: translateY(-8px) rotate(-0.5deg); }
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Floating Travel Icons */
+        .travel-icons {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .travel-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.1;
+            animation: floatAround 20s ease-in-out infinite;
+        }
+
+        .travel-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .travel-icon:nth-child(2) { top: 20%; right: 20%; animation-delay: -3s; }
+        .travel-icon:nth-child(3) { bottom: 30%; left: 10%; animation-delay: -6s; }
+        .travel-icon:nth-child(4) { bottom: 15%; right: 25%; animation-delay: -9s; }
+        .travel-icon:nth-child(5) { top: 50%; left: 5%; animation-delay: -12s; }
+        .travel-icon:nth-child(6) { top: 70%; right: 10%; animation-delay: -15s; }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-20px) rotate(5deg); opacity: 0.2; }
+            50% { transform: translateY(-10px) rotate(-3deg); opacity: 0.15; }
+            75% { transform: translateY(-25px) rotate(2deg); opacity: 0.18; }
+        }
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.7rem 1.2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .chat-container {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            width: 90%;
+            max-width: 520px;
+            height: 95vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1.8rem;
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+            position: relative;
+        }
+
+        .header::before {
+            content: '🌍';
+            position: absolute;
+            top: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            animation: bounce 2s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .header h1 {
+            margin: 0.5rem 0 0 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 0.5rem 0 0 0;
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        /* Quick Actions - moved below input, smaller */
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-action {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 8px;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #667eea;
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .quick-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .quick-action:hover::before {
+            left: 100%;
+        }
+
+        .quick-action:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .quick-action .icon {
+            display: inline;
+            font-size: 0.9rem;
+            margin-right: 0.25rem;
+        }
+        #chat-box {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background: rgba(248, 250, 252, 0.7);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        #chat-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #chat-box::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 3px;
+        }
+
+        #chat-box::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+
+        .message {
+            margin: 0.75rem 0;
+            max-width: 85%;
+            animation: messageSlide 0.4s ease-out;
+        }
+
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 5px 18px;
+            margin-left: auto;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .bot-message {
+            background: white;
+            color: #333;
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 18px 5px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .bot-message::before {
+            content: '🧳';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: none;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            max-height: 120px;
+            min-height: 48px;
+        }
+
+        #user-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: white;
+        }
+        #send-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 48px;
+            height: 48px;
+            justify-content: center;
+        }
+
+        #send-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        #send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .chat-container {
+                width: 95%;
+                height: 100vh;
+                border-radius: 0;
+                padding: 1rem;
+            }
+            
+            .quick-actions {
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+            
+            .quick-action {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.5rem 0.8rem;
+            }
+        }
+        
+        /* Model selector hover effects */
+        .model-option:hover {
+            background: rgba(102, 126, 234, 0.1) !important;
+        }
+        
+        /* Fix dropdown positioning */
+        .model-selector-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 2000;
+        }
+        
+        .model-selector-toggle {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            color: white !important;
+            padding: 0.5rem 0.8rem !important;
+            border-radius: 8px !important;
+            cursor: pointer !important;
+            font-size: 0.85rem !important;
+            backdrop-filter: blur(15px) !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+        
+        .model-dropdown {
+            position: absolute !important;
+            top: 100% !important;
+            right: 0 !important;
+            margin-top: 0.5rem !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 12px !important;
+            backdrop-filter: blur(20px) !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+            min-width: 200px !important;
+            z-index: 2001 !important;
+        }
+        
+        .model-option {
+            padding: 0.75rem !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+            transition: background 0.2s !important;
+        }
+        
+        .model-option .model-name {
+            font-weight: 500 !important;
+            color: #333 !important;
+        }
+        
+        .model-option .model-description {
+            font-size: 0.75rem !important;
+            color: #666 !important;
+        }
+    </style>
+</head>
+<body>    <!-- Animated Background -->
+    <div class="travel-bg"></div>
+    
+    <!-- Floating Travel Icons -->
+    <div class="travel-icons">
+        <div class="travel-icon">✈️</div>
+        <div class="travel-icon">🏖️</div>
+        <div class="travel-icon">🗺️</div>
+        <div class="travel-icon">🎒</div>
+        <div class="travel-icon">🏔️</div>
+        <div class="travel-icon">🏛️</div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="../index.html" class="back-button">
+        <span>←</span> Back to Playground
+    </a>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <div class="header">
+            <h1>TravelBot</h1>
+            <p>Your AI Travel Companion for planning amazing journeys</p>
+        </div>
+
+
+        <!-- Chat Box -->
+        <div id="chat-box">
+            <div class="message bot-message">
+                🌍 <strong>Welcome to TravelBot!</strong> I'm your personal travel assistant, ready to help you plan incredible journeys. I can help with:
+                <br><br>
+                • 🗺️ <strong>Trip Planning:</strong> Destinations, itineraries, and hidden gems
+                <br>
+                • 💰 <strong>Budget Planning:</strong> Cost estimates and money-saving tips  
+                <br>
+                • 🏨 <strong>Accommodations:</strong> Hotels, hostels, and unique stays
+                <br>
+                • 🍜 <strong>Local Experiences:</strong> Food, culture, and customs
+                <br>
+                • 📋 <strong>Travel Tips:</strong> Packing, safety, and logistics
+                <br><br>
+                Where would you like to explore? 🧳✨
+            </div>
+        </div>
+
+        <!-- Input Container -->
+        <div class="input-container">
+            <textarea 
+                id="user-input" 
+                placeholder="Ask about destinations, budgets, local tips, or anything travel-related..."
+                rows="1"
+                onkeydown="handleKeyPress(event)"
+            ></textarea>
+            <button id="send-button" onclick="sendMessage()">
+                <span id="send-icon">✈️</span>
+            </button>
+        </div>
+
+        <!-- Quick Actions - moved below input -->
+        <div class="quick-actions">
+            <div class="quick-action" onclick="quickAction('Plan a weekend getaway')">
+                <span class="icon">🏖️</span>Weekend
+            </div>
+            <div class="quick-action" onclick="quickAction('Create a budget for my trip')">
+                <span class="icon">💰</span>Budget
+            </div>
+            <div class="quick-action" onclick="quickAction('Local customs and etiquette tips')">
+                <span class="icon">🤝</span>Customs
+            </div>
+            <div class="quick-action" onclick="quickAction('Best time to visit destinations')">
+                <span class="icon">🌤️</span>Best Times
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Selector -->
+    <div class="model-selector-container">
+        <button class="model-selector-toggle" onclick="toggleModelSelector()">
+            <span class="model-icon">🤖</span>
+            <span class="model-name" id="current-model-name">Gemini Flash</span>
+            <span class="toggle-arrow" id="toggle-arrow">▼</span>
+        </button>
+        
+        <div class="model-dropdown" id="model-dropdown">
+            <div class="model-option" data-model="gemini-1.5-flash">
+                <span class="model-icon">⚡</span>
+                <div>
+                    <div class="model-name">Gemini Flash</div>
+                    <div class="model-description">Fast & efficient</div>
+                </div>
+            </div>            <div class="model-option" data-model="gemini-1.5-pro">
+                <span class="model-icon">🧠</span>
+                <div>
+                    <div class="model-name">Gemini Pro</div>
+                    <div class="model-description">Advanced reasoning</div>
+                </div>
+            </div>
+            <div class="model-option" data-model="llama-4-scout">
+                <span class="model-icon">🦙</span>
+                <div>
+                    <div class="model-name">Llama 4 Scout</div>
+                    <div class="model-description">Free via OpenRouter</div>
+                </div>
+            </div>
+            <div class="model-option" data-model="deepseek-r1">
+                <span class="model-icon">🔍</span>
+                <div>
+                    <div class="model-name">DeepSeek R1</div>
+                    <div class="model-description">Reasoning model</div>
+                </div>
+            </div>
+            <div class="model-option" data-model="gemini-2.5-pro">
+                <span class="model-icon">💎</span>
+                <div>
+                    <div class="model-name">Gemini 2.5 Pro</div>
+                    <div class="model-description">Latest & greatest</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedModel = 'gemini-1.5-flash';
+        let isTyping = false;
+
+        // Handle key press for sending messages
+        function handleKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Quick action functionality
+        function quickAction(message) {
+            document.getElementById('user-input').value = message;
+            sendMessage();
+        }
+
+        // Toggle model selector
+        function toggleModelSelector() {
+            const dropdown = document.getElementById('model-dropdown');
+            const arrow = document.getElementById('toggle-arrow');
+            
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+                arrow.textContent = '▼';
+            } else {
+                dropdown.style.display = 'block';
+                arrow.textContent = '▲';
+            }
+        }
+
+        // Auto-resize textarea
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        document.getElementById('user-input').addEventListener('input', function() {
+            autoResize(this);
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                const container = document.querySelector('.model-selector-container');
+                if (!container.contains(event.target)) {
+                    document.getElementById('model-dropdown').style.display = 'none';
+                    document.getElementById('toggle-arrow').textContent = '▼';
+                }
+            });
+        });
+
+        // Enhanced travel-focused prompt engineering
+        function createTravelPrompt(userMessage) {
+            return `You are TravelBot, an expert AI travel assistant specializing in comprehensive travel planning and advice. Your responses should be engaging, practical, and personalized.
+
+CORE EXPERTISE:
+• Trip Planning: Destinations, itineraries, hidden gems, seasonal recommendations
+• Budget Planning: Cost breakdowns, money-saving tips, currency advice
+• Accommodations: Hotels, hostels, vacation rentals, unique stays
+• Transportation: Flights, trains, buses, local transport, road trips
+• Local Experiences: Food, culture, customs, festivals, activities
+• Travel Logistics: Visas, documents, packing, safety, health
+
+RESPONSE STYLE:
+• Use travel emojis (🌍✈️🏨🍜🗺️) to make responses engaging
+• Provide specific, actionable advice with concrete examples
+• Include cost estimates when discussing budgets (approximate ranges)
+• Mention local customs and cultural considerations when relevant
+• Suggest lesser-known alternatives alongside popular destinations
+• Be enthusiastic but realistic about travel expectations
+
+FORMAT GUIDELINES:
+• Use bullet points for lists and itineraries
+• Include approximate costs in local currency when possible
+• Mention best times to visit with weather considerations
+• Provide safety tips and cultural etiquette when relevant
+• Suggest booking timelines and advance planning needs
+
+USER QUERY: ${userMessage}
+
+Provide a helpful, detailed response that captures the excitement of travel while being practical and informative.`;
+        }
+        // Send message function
+        async function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const chatBox = document.getElementById('chat-box');
+            const sendButton = document.getElementById('send-button');
+            const sendIcon = document.getElementById('send-icon');
+            
+            const message = userInput.value.trim();
+            if (!message || isTyping) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            userInput.value = '';
+            autoResize(userInput);
+
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Disable input during processing
+            isTyping = true;
+            sendButton.disabled = true;
+            sendIcon.innerHTML = '<div style="animation: spin 1s linear infinite;">⟳</div>';
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: createTravelPrompt(message),
+                        botType: 'travel',
+                        model: selectedModel
+                    }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                // Remove typing indicator
+                hideTypingIndicator();
+                
+                // Add bot response with enhanced formatting
+                addMessage(formatTravelResponse(data.reply), 'bot');
+
+            } catch (error) {
+                console.error('Error:', error);
+                hideTypingIndicator();
+                addMessage('✈️ Sorry, I encountered some turbulence! Please try again in a moment.', 'bot');
+            } finally {
+                // Re-enable input
+                isTyping = false;
+                sendButton.disabled = false;
+                sendIcon.textContent = '✈️';
+            }
+        }
+        // Enhanced message formatting for travel responses
+        function formatTravelResponse(response) {
+            // Add travel-specific formatting and styling
+            let formatted = response;
+            
+            // Highlight destinations with emoji
+            formatted = formatted.replace(/\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)\b(?=\s*(?:is|has|offers|features))/g, '🌍 **$1**');
+            
+            // Format budget information
+            formatted = formatted.replace(/\$(\d+(?:,\d{3})*(?:\.\d{2})?)/g, '💰 **$$$1**');
+            
+            // Highlight time periods
+            formatted = formatted.replace(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/g, '📅 **$1**');
+            formatted = formatted.replace(/\b(\d+)\s*(days?|weeks?|months?)\b/g, '⏰ **$1 $2**');
+            
+            // Add icons to common travel terms
+            formatted = formatted.replace(/\b(flight|flights)\b/gi, '✈️ $1');
+            formatted = formatted.replace(/\b(hotel|hotels|accommodation)\b/gi, '🏨 $1');
+            formatted = formatted.replace(/\b(restaurant|restaurants|food)\b/gi, '🍜 $1');
+            formatted = formatted.replace(/\b(museum|museums)\b/gi, '🏛️ $1');
+            formatted = formatted.replace(/\b(beach|beaches)\b/gi, '🏖️ $1');
+            formatted = formatted.replace(/\b(mountain|mountains)\b/gi, '🏔️ $1');
+            
+            return formatted;
+        }
+
+        // Add message to chat
+        function addMessage(message, sender) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            // Convert markdown-style formatting to HTML
+            let formattedMessage = message
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+            
+            messageDiv.innerHTML = formattedMessage;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        // Typing indicator functions
+        function showTypingIndicator() {
+            const chatBox = document.getElementById('chat-box');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot-message';
+            typingDiv.id = 'typing-indicator';
+            typingDiv.innerHTML = `
+                <span>🧳 TravelBot is planning...</span>
+                <div style="display: flex; gap: 3px; margin-top: 0.5rem;">
+                    <div style="width: 6px; height: 6px; background: #667eea; border-radius: 50%; animation: typingBounce 1.4s ease-in-out infinite;"></div>
+                    <div style="width: 6px; height: 6px; background: #667eea; border-radius: 50%; animation: typingBounce 1.4s ease-in-out infinite 0.2s;"></div>
+                    <div style="width: 6px; height: 6px; background: #667eea; border-radius: 50%; animation: typingBounce 1.4s ease-in-out infinite 0.4s;"></div>
+                </div>
+                <style>
+                    @keyframes typingBounce {
+                        0%, 60%, 100% { transform: translateY(0); }
+                        30% { transform: translateY(-8px); }
+                    }
+                </style>
+            `;
+            chatBox.appendChild(typingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        // Initialize the chat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Focus on input
+            document.getElementById('user-input').focus();
+            
+            // Add some interactive welcome animations
+            setTimeout(() => {
+                const quickActions = document.querySelectorAll('.quick-action');
+                quickActions.forEach((action, index) => {
+                    setTimeout(() => {
+                        action.style.animation = 'messageSlide 0.5s ease-out';
+                    }, index * 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
