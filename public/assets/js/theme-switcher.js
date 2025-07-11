@@ -1,5 +1,5 @@
 /**
- * Theme Switcher for Bot Playground
+ * Theme Switcher for Chatty
  * Provides dark/light mode toggle with smooth transitions
  */
 

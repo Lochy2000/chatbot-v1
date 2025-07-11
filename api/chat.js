@@ -40,7 +40,7 @@ async function callOpenRouter(modelName, message) {
     headers: {
       'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
-      'X-Title': 'Bot Playground'
+      'X-Title': 'Chatty'
     },
     body: JSON.stringify({
       model: modelName,

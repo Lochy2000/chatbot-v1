@@ -3,10 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Playground - Icon Gallery</title>
+    <title>Chatty - Icon Gallery</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="assets/css/icons.css" rel="stylesheet">
     <style>
+        /* Disable text selection for clean UX */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: default;
+        }
+        
+        /* Interactive elements get pointer cursor */
+        .back-button {
+            cursor: pointer;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -138,7 +154,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-button">← Back to Playground</a>
+        <a href="../index.html" class="back-button">← Back to Chatty</a>
         
         <h1>🎨 Icon Gallery</h1>
         

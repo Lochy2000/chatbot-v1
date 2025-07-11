@@ -1,7 +1,7 @@
 {
-  "name": "bot-playground",
+  "name": "chatty",
   "version": "1.0.0",
-  "description": "Interactive playground for testing different AI chatbot implementations",
+  "description": "Specialized AI chatbots for different business needs - powered by 11 cutting-edge AI models",
   "type": "module",
   "engines": {
     "node": "18.x"
@@ -22,8 +22,8 @@
   "keywords": [
     "ai",
     "chatbot",
-    "gemini",
-    "playground",
+    "chatty",
+    "specialized-ai",
     "conversational-ai"
   ],
   "repository": {

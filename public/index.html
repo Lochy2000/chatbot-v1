@@ -3,37 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Playground - 11 Free AI Models | Llama 4, DeepSeek R1, Gemini 2.5 Pro</title>
+    <title>Chatty - 11 Free AI Models | Specialized Chatbots for Every Business</title>
     
     <!-- Enhanced Meta Tags -->
-    <meta name="description" content="Experience specialized AI chatbots built for different purposes. Try 6 unique bots powered by 11 cutting-edge AI models including Llama 4, DeepSeek R1, and Gemini 2.5 Pro - all free!">
-    <meta name="keywords" content="AI chatbot, free AI models, Llama 4, DeepSeek R1, Gemini 2.5 Pro, specialized chatbots, AI playground, conversational AI">
-    <meta name="author" content="Bot Playground">
+    <meta name="description" content="Specialized AI chatbots built for different business needs. 6 unique bots powered by 11 cutting-edge AI models including Llama 4, DeepSeek R1, and Gemini 2.5 Pro - all free!">
+    <meta name="keywords" content="AI chatbot, specialized chatbots, free AI models, Llama 4, DeepSeek R1, Gemini 2.5 Pro, business AI, conversational AI, Chatty">
+    <meta name="author" content="Chatty">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://your-domain.com/">
-    <meta property="og:title" content="Bot Playground - 11 Free AI Models">
-    <meta property="og:description" content="Experience specialized AI chatbots built for different purposes. Try 6 unique bots powered by 11 cutting-edge AI models - all free!">
+    <meta property="og:title" content="Chatty - Specialized AI Chatbots">
+    <meta property="og:description" content="6 specialized AI chatbots powered by 11 cutting-edge models. Perfect for e-commerce, education, travel, and more - all free!">
     <meta property="og:image" content="https://your-domain.com/assets/images/og-image.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://your-domain.com/">
-    <meta property="twitter:title" content="Bot Playground - 11 Free AI Models">
-    <meta property="twitter:description" content="Experience specialized AI chatbots built for different purposes. Try 6 unique bots powered by 11 cutting-edge AI models - all free!">
+    <meta property="twitter:title" content="Chatty - Specialized AI Chatbots">
+    <meta property="twitter:description" content="6 specialized AI chatbots powered by 11 cutting-edge models. Perfect for e-commerce, education, travel, and more - all free!">
     <meta property="twitter:image" content="https://your-domain.com/assets/images/og-image.png">
     
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/chaticon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/chaticon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/chaticon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/chatty-icon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/images/chatty-icon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/images/chatty-icon.svg">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/icons.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* Global Text Selection Rules - Disable by default for clean UX */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Enable selection only where needed */
+        input, textarea, [contenteditable="true"] {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+        
+        /* Remove text cursor from all elements by default */
+        * {
+            cursor: default;
+        }
+        
+        /* Proper cursor for interactive elements only */
+        .bot-card, .nav-link, .btn, button, a, .burger-menu, .back-btn {
+            cursor: pointer;
+        }
+        
+        /* Input elements get text cursor */
+        input, textarea, [contenteditable="true"] {
+            cursor: text;
+        }
 
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -129,10 +162,6 @@
         }
 
         .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
             position: fixed;
             top: 0;
             left: 0;
@@ -142,6 +171,16 @@
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
+            padding: 1.5rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
         }
 
         .nav.scrolled {
@@ -1052,8 +1091,12 @@
                 padding: 0 1rem;
             }
             
-            .nav {
-                padding: 1rem 0;
+            .nav-content {
+                padding: 0 2rem;
+            }
+
+            .nav.scrolled {
+                padding: 0.75rem 0;
             }
 
             .nav-links {
@@ -1194,6 +1237,10 @@
         @media (max-width: 480px) {
             .container {
                 padding: 0 0.75rem;
+            }
+            
+            .nav-content {
+                padding: 0 1rem;
             }
             
             .hero-title {
@@ -1344,21 +1391,23 @@
         
         <div class="container">
             <header class="nav">
-                <div class="logo">
-                    <img src="assets/images/bot.png" alt="Bot Playground Logo">
-                    <span class="logo-text">Bot Playground</span>
-                </div>
-                <nav class="nav-links">
-                    <a href="#bots" class="nav-link">Explore Bots</a>
-                    <a href="#models" class="nav-link">AI Models</a>
-                    <a href="analytics.html" class="nav-link">📊 Analytics</a>
-                    <a href="icon-gallery.html" class="nav-link">Icon Gallery</a>
-                    <a href="#about" class="nav-link">About</a>
-                </nav>
-                <div class="burger-menu" id="burger-menu">
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
-                    <div class="burger-line"></div>
+                <div class="nav-content">
+                    <div class="logo">
+                        <img src="assets/images/chatty-icon.svg" alt="Chatty Logo" width="40" height="40">
+                        <span class="logo-text">Chatty</span>
+                    </div>
+                    <nav class="nav-links">
+                        <a href="#bots" class="nav-link">Explore Bots</a>
+                        <a href="#models" class="nav-link">AI Models</a>
+                        <a href="analytics.html" class="nav-link">📊 Analytics</a>
+                        <a href="icon-gallery.html" class="nav-link">Icon Gallery</a>
+                        <a href="#about" class="nav-link">About</a>
+                    </nav>
+                    <div class="burger-menu" id="burger-menu">
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                        <div class="burger-line"></div>
+                    </div>
                 </div>
             </header>
             
@@ -1863,10 +1912,10 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <div class="logo">
-                        <img src="assets/images/bot.png" alt="Bot Playground" style="width: 32px; height: 32px;">
-                        <span class="logo-text">Bot Playground</span>
+                        <img src="assets/images/chatty-icon.svg" alt="Chatty" style="width: 32px; height: 32px;">
+                        <span class="logo-text">Chatty</span>
                     </div>
-                    <p>Explore different approaches to conversational AI with 11 free models</p>
+                    <p>Specialized AI chatbots powered by 11 cutting-edge AI models</p>
                 </div>
                 <div class="footer-links">
                     <div class="link-group">

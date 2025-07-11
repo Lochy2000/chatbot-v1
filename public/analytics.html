@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot Analytics Dashboard - Bot Playground</title>
+    <title>Bot Analytics Dashboard - Chatty</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/icons.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* Disable text selection for clean UX */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: default;
+        }
+        
+        /* Interactive elements get pointer cursor */
+        button, .btn, a, .back-btn {
+            cursor: pointer;
+        }
 
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -201,10 +217,10 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="assets/images/bot.png" alt="Bot Playground">
+                    <img src="assets/images/chatty-icon.svg" alt="Chatty" width="32" height="32">
                     <span>Analytics Dashboard</span>
                 </div>
-                <a href="index.html" class="back-btn">← Back to Playground</a>
+                <a href="index.html" class="back-btn">← Back to Chatty</a>
             </div>
         </div>
     </header>

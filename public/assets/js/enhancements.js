@@ -1,9 +1,9 @@
 /**
- * Bot Playground - UI Enhancements
+ * Chatty - UI Enhancements
  * Adds interactive features and animations
  */
 
-class BotPlaygroundEnhancements {
+class ChattyEnhancements {
     constructor() {
         this.init();
     }
@@ -232,7 +232,7 @@ function setupMobileMenu() {
 
 // Performance optimization: Load enhancements after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    new BotPlaygroundEnhancements();
+    new ChattyEnhancements();
     setupMobileMenu();
     
     // Initialize scroll effects immediately

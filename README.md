@@ -1,4 +1,4 @@
-# Bot Playground
+# Chatty
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=vercel)](https://your-deployed-url.vercel.app)
 [![Node.js](https://img.shields.io/badge/Node.js-18.x-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
@@ -6,9 +6,9 @@
 [![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini-orange?style=for-the-badge&logo=google)](https://ai.google.dev/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-> **An interactive demonstration site showcasing different types of AI chatbots designed for specific use cases. Experience how specialized chatbots work better than generic ones with 6 unique bots powered by 11 cutting-edge AI models.**
+> **Specialized AI chatbots designed for different business needs. Experience how purpose-built chatbots work better than generic ones with 6 unique bots powered by 11 cutting-edge AI models.**
 
-![Bot Playground Screenshot](https://github.com/user-attachments/assets/3f9d7f4d-6e1c-48f8-95fa-62b4101ba0d1)
+![Chatty Screenshot](https://github.com/user-attachments/assets/3f9d7f4d-6e1c-48f8-95fa-62b4101ba0d1)
 
 ---
 
@@ -103,7 +103,7 @@ Deploy to Vercel in 3 clicks:
 ## Project Structure
 
 ```
-Bot Playground
+Chatty
 ├── 📄 README.md                 # Project overview
 ├── 📄 package.json              # Dependencies and scripts
 ├── 📄 vercel.json              # Vercel deployment config

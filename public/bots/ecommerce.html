@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Assistant - Bot Playground</title>
+    <title>Shopping Assistant - Chatty</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="../assets/css/model-selector.css" rel="stylesheet" id="model-selector-css">
     <style>
@@ -11,6 +11,27 @@
 
         * {
             box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            cursor: default;
+        }
+        
+        /* Chat input should allow text selection */
+        #user-input {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            cursor: text;
+        }
+        
+        /* Interactive elements get pointer cursor */
+        button, .send-btn, .model-selector, select, .back-btn {
+            cursor: pointer;
         }
 
         body {
