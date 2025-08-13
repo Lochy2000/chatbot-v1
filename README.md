@@ -1,6 +1,6 @@
 # Chatty
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=vercel)](https://your-deployed-url.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=vercel)](https://chatbot-v1-ly2vly8kx-lochlanns-projects.vercel.app/index.html)
 [![Node.js](https://img.shields.io/badge/Node.js-18.x-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
 [![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini-orange?style=for-the-badge&logo=google)](https://ai.google.dev/)
@@ -28,12 +28,12 @@ Most websites use generic chatbots that try to handle everything. But different 
 
 | Bot | Purpose | Key Features | Status |
 |-----|---------|--------------|--------|
-| **Shopping Assistant** | E-commerce focused chatbot | 🔍 Product Search, 📦 Order Tracking, ↩️ Returns | 🔥 Popular |
-| **Academic Guide** | Educational institution bot | 📚 Course Info, 🎓 Admissions, 🏫 Campus Life | 🆓 Free |
-| **Quick Helper** | Lightweight modal interface | ⚡ Minimal UI, 💬 Quick Replies, 🪟 Modal Design | 🆓 Free |
-| **Adaptive Assistant** | Multi-personality bot | 🔄 Multi-Mode, 🎯 Adaptable, 🔧 Versatile | 🆓 Free |
-| **TravelBot** | AI travel companion | 🗺️ Trip Planning, 💰 Budget Calculator, 💡 Local Tips | ✨ New |
-| **FixIt Pro** | DIY and home repair assistant | 📋 DIY Guides, 🔧 Tool Tips, ⚠️ Safety First | ✨ New |
+| **Shopping Assistant** | E-commerce focused chatbot |  Product Search,  Order Tracking,  Returns | Popular |
+| **Academic Guide** | Educational institution bot |  Course Info,  Admissions,  Campus Life |  Free |
+| **Quick Helper** | Lightweight modal interface |  Minimal UI,  Quick Replies,  Modal Design |  Free |
+| **Adaptive Assistant** | Multi-personality bot | Multi-Mode,  Adaptable,  Versatile |  Free |
+| **TravelBot** | AI travel companion |  Trip Planning,  Budget Calculator,  Local Tips |  New |
+| **FixIt Pro** | DIY and home repair assistant |  DIY Guides,  Tool Tips, Safety First |  New |
 
 ---
 
