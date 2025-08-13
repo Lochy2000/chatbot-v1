@@ -28,12 +28,12 @@ Most websites use generic chatbots that try to handle everything. But different 
 
 | Bot | Purpose | Key Features | Status |
 |-----|---------|--------------|--------|
-| **Shopping Assistant** | E-commerce focused chatbot | 🔍 Product Search, 📦 Order Tracking, ↩️ Returns | 🔥 Popular |
-| **Academic Guide** | Educational institution bot | 📚 Course Info, 🎓 Admissions, 🏫 Campus Life | 🆓 Free |
-| **Quick Helper** | Lightweight modal interface | ⚡ Minimal UI, 💬 Quick Replies, 🪟 Modal Design | 🆓 Free |
-| **Adaptive Assistant** | Multi-personality bot | 🔄 Multi-Mode, 🎯 Adaptable, 🔧 Versatile | 🆓 Free |
-| **TravelBot** | AI travel companion | 🗺️ Trip Planning, 💰 Budget Calculator, 💡 Local Tips | ✨ New |
-| **FixIt Pro** | DIY and home repair assistant | 📋 DIY Guides, 🔧 Tool Tips, ⚠️ Safety First | ✨ New |
+| **Shopping Assistant** | E-commerce focused chatbot |  Product Search,  Order Tracking,  Returns | Popular |
+| **Academic Guide** | Educational institution bot |  Course Info,  Admissions,  Campus Life |  Free |
+| **Quick Helper** | Lightweight modal interface |  Minimal UI,  Quick Replies,  Modal Design |  Free |
+| **Adaptive Assistant** | Multi-personality bot | Multi-Mode,  Adaptable,  Versatile |  Free |
+| **TravelBot** | AI travel companion |  Trip Planning,  Budget Calculator,  Local Tips |  New |
+| **FixIt Pro** | DIY and home repair assistant |  DIY Guides,  Tool Tips, Safety First |  New |
 
 ---
 
