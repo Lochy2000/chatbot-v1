@@ -9,15 +9,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-        /* Disable text selection for clean UX */
         * {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
             -webkit-touch-callout: none;
             -webkit-tap-highlight-color: transparent;
-            cursor: default;
         }
         
         /* Interactive elements get pointer cursor */
@@ -127,6 +121,17 @@
             font-size: 1.1rem;
         }
 
+        .page-subtitle small { color: var(--text-muted); display: block; margin-top: .25rem; }
+		.trends { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+		.card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.25rem; backdrop-filter: blur(8px); }
+		.chart { display: grid; grid-template-columns: repeat(12, 1fr); align-items: end; gap: .5rem; height: 160px; }
+		.bar { background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 6px 6px 0 0; }
+		.legend { display: flex; justify-content: space-between; color: var(--text-secondary); font-size: .85rem; margin-top: .5rem; }
+		.table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+		.table th, .table td { border-bottom: 1px solid var(--border-color); padding: .6rem .5rem; text-align: left; }
+		.table th { color: var(--text-secondary); font-weight: 600; }
+		@media (max-width: 900px){ .trends { grid-template-columns: 1fr; } }
+
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -230,6 +235,47 @@
             <h1 class="page-title">Bot Analytics Dashboard</h1>
             <p class="page-subtitle">Real-time insights into bot performance and user engagement</p>
 
+            <div class="trends">
+                <div class="card">
+                    <h3>Total Conversations</h3>
+                    <p>2,847</p>
+                    <div class="chart">
+                        <div class="bar" style="height: 80%;"></div>
+                        <div class="bar" style="height: 60%;"></div>
+                        <div class="bar" style="height: 90%;"></div>
+                        <div class="bar" style="height: 70%;"></div>
+                        <div class="bar" style="height: 85%;"></div>
+                        <div class="bar" style="height: 65%;"></div>
+                        <div class="bar" style="height: 75%;"></div>
+                        <div class="bar" style="height: 95%;"></div>
+                        <div class="bar" style="height: 80%;"></div>
+                        <div class="bar" style="height: 70%;"></div>
+                        <div class="bar" style="height: 85%;"></div>
+                        <div class="bar" style="height: 90%;"></div>
+                    </div>
+                    <div class="legend">
+                        <span>Low</span>
+                        <span>High</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Active Bots</h3>
+                    <p>6</p>
+                    <div class="chart">
+                        <div class="bar" style="height: 90%;"></div>
+                        <div class="bar" style="height: 80%;"></div>
+                        <div class="bar" style="height: 70%;"></div>
+                        <div class="bar" style="height: 95%;"></div>
+                        <div class="bar" style="height: 85%;"></div>
+                        <div class="bar" style="height: 75%;"></div>
+                    </div>
+                    <div class="legend">
+                        <span>Low</span>
+                        <span>High</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-header">
@@ -267,6 +313,19 @@
                     <div class="metric-label">Satisfaction Rate (%)</div>
                 </div>
             </div>
+			<div class="card" style="margin-top:1rem">
+				<h3>Recent Sessions</h3>
+				<table class="table">
+					<thead>
+						<tr><th>Time</th><th>Bot</th><th>Model</th><th>Result</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>Today, 12:04</td><td>Shopping Assistant</td><td>Gemini Flash</td><td>Completed</td></tr>
+						<tr><td>Today, 11:52</td><td>TravelBot</td><td>DeepSeek R1</td><td>Completed</td></tr>
+						<tr><td>Today, 11:37</td><td>FixIt Pro</td><td>Llama 4 Scout</td><td>Completed</td></tr>
+					</tbody>
+				</table>
+			</div>
         </div>
     </main>
 

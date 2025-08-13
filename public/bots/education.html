@@ -83,16 +83,16 @@
         .chat-container {
             position: relative;
             z-index: 1;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            width: 90%;
-            max-width: 450px;
-            height: 90vh;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            width: 92%;
+            max-width: 480px;
+            height: 92vh;
             display: flex;
             flex-direction: column;
-            padding: 1.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 1.25rem;
+            box-shadow: 0 16px 36px rgba(0,0,0,0.1);
             border: 1px solid rgba(255,255,255,0.2);
         }
 
@@ -567,6 +567,7 @@
         </div>
     </div>
 
+    <script src="../assets/js/page-transitions.js"></script>
     <script>
         const chatBox = document.getElementById('chat-box');
         const userInput = document.getElementById('user-input');
@@ -826,5 +827,6 @@
             }
         }, 300);
     </script>
+    <script src="../assets/js/page-transitions.js"></script>
 </body>
 </html>

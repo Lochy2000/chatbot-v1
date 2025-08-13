@@ -151,10 +151,17 @@ class ChattyEnhancements {
         const scrolled = window.pageYOffset;
         const navbar = document.querySelector('.nav');
         
-        if (scrolled > 50) {
+        if (!navbar) return;
+        if (scrolled > 10) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
+        }
+        // pill shrink state
+        if (scrolled > 140) {
+            navbar.classList.add('shrink');
+        } else {
+            navbar.classList.remove('shrink');
         }
     }
 
@@ -237,8 +244,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize scroll effects immediately
     const navbar = document.querySelector('.nav');
-    if (window.pageYOffset > 50) {
+    if (navbar && window.pageYOffset > 10) {
         navbar.classList.add('scrolled');
+    }
+    if (navbar && window.pageYOffset > 140) {
+        navbar.classList.add('shrink');
     }
 });
 

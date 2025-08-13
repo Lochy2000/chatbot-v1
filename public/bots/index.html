@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Explore Bots - Chatty</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link href="../assets/css/icons.css" rel="stylesheet">
+	<style>
+		:root {
+			--primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			--glass-bg: rgba(255, 255, 255, 0.08);
+			--glass-border: rgba(255, 255, 255, 0.15);
+			--dark-bg: #0a0a0f;
+			--text-primary: #ffffff;
+			--text-secondary: #a0a0a0;
+		}
+		* { box-sizing: border-box; }
+		body { margin: 0; font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--text-primary); }
+		.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+		/* Header */
+		.nav { position: sticky; top: 0; z-index: 50; background: rgba(10,10,15,0.6); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+		.nav-content { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; }
+		.logo { display: flex; align-items: center; gap: .5rem; }
+		.logo img { width: 28px; height: 28px; }
+		.nav-links { display: flex; gap: 1rem; }
+		.nav-link { color: var(--text-secondary); text-decoration: none; padding: .5rem .75rem; border-radius: 8px; }
+		.nav-link:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+		.header-hero { padding: 3rem 0 1rem; text-align: center; }
+		.header-hero h1 { font-size: clamp(2rem, 4vw, 2.75rem); margin: 0; }
+		.header-hero p { color: var(--text-secondary); margin: .75rem 0 0; }
+
+		/* Grid */
+		.bots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 2rem 0 4rem; }
+		.bot-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.25rem; backdrop-filter: blur(8px); transition: transform .25s ease, box-shadow .25s ease; position: relative; overflow: hidden; }
+		.bot-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.25); }
+		.bot-title { margin: .5rem 0; font-size: 1.25rem; }
+		.bot-description { color: var(--text-secondary); font-size: .95rem; }
+		.bot-features { display: flex; flex-wrap: wrap; gap: .4rem; margin: .75rem 0 1rem; }
+		.feature-tag { background: rgba(102,126,234,.2); color: #a78bfa; border: 1px solid rgba(167,139,250,.3); padding: .25rem .6rem; border-radius: 999px; font-size: .8rem; }
+		.bot-link { text-decoration: none; color: #c4b5fd; font-weight: 600; }
+
+		.footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 2rem 0; color: var(--text-secondary); text-align: center; }
+
+		@media (max-width: 768px) { .container { padding: 0 1rem; } }
+	</style>
+</head>
+<body>
+	<header class="nav">
+		<div class="container nav-content">
+			<div class="logo">
+				<img src="../assets/images/chatty-icon.svg" alt="Chatty" width="28" height="28">
+				<strong>Chatty</strong>
+			</div>
+			<nav class="nav-links">
+				<a class="nav-link" href="../index.html">Home</a>
+				<a class="nav-link" href="../analytics.html">Analytics</a>
+			</nav>
+		</div>
+	</header>
+
+	<section class="header-hero">
+		<div class="container">
+			<h1>Explore Specialized Chatbots</h1>
+			<p>Test different approaches—shopping, education, travel, repairs, and more.</p>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+			<div class="bots-grid">
+				<!-- Shopping -->
+				<div class="bot-card">
+					<div class="bot-icon"><img src="../assets/images/icons/database-storage.png" alt="Shopping" class="icon-large"></div>
+					<div class="bot-title">Shopping Assistant</div>
+					<div class="bot-description">Product search, order tracking, and returns help.</div>
+					<div class="bot-features">
+						<span class="feature-tag">🔍 Search</span><span class="feature-tag">📦 Tracking</span><span class="feature-tag">↩️ Returns</span>
+					</div>
+					<a class="bot-link" href="ecommerce.html">Open →</a>
+				</div>
+
+				<!-- Education -->
+				<div class="bot-card">
+					<div class="bot-icon"><img src="../assets/images/icons/graduation.png" alt="Education" class="icon-large"></div>
+					<div class="bot-title">Academic Guide</div>
+					<div class="bot-description">Course info, admissions, and campus life questions.</div>
+					<div class="bot-features">
+						<span class="feature-tag">📚 Courses</span><span class="feature-tag">🎓 Admissions</span><span class="feature-tag">🏫 Campus</span>
+					</div>
+					<a class="bot-link" href="education.html">Open →</a>
+				</div>
+
+				<!-- Minimal -->
+				<div class="bot-card">
+					<div class="bot-icon"><img src="../assets/images/icons/bluechat.png" alt="Quick Helper" class="icon-large"></div>
+					<div class="bot-title">Quick Helper</div>
+					<div class="bot-description">Lightweight modal chat that stays out of the way.</div>
+					<div class="bot-features">
+						<span class="feature-tag">⚡ Minimal</span><span class="feature-tag">💬 Quick</span><span class="feature-tag">🪟 Modal</span>
+					</div>
+					<a class="bot-link" href="minimal.html">Open →</a>
+				</div>
+
+				<!-- Foundation -->
+				<div class="bot-card">
+					<div class="bot-icon"><img src="../assets/images/icons/robot.png" alt="Adaptive" class="icon-large"></div>
+					<div class="bot-title">Adaptive Assistant</div>
+					<div class="bot-description">Shifts tone and depth to match your needs.</div>
+					<div class="bot-features">
+						<span class="feature-tag">🔄 Multi-Mode</span><span class="feature-tag">🎯 Adaptable</span>
+					</div>
+					<a class="bot-link" href="foundation.html">Open →</a>
+				</div>
+
+				<!-- Travel -->
+				<div class="bot-card">
+					<div class="bot-icon"><span style="font-size:48px">🌍</span></div>
+					<div class="bot-title">TravelBot</div>
+					<div class="bot-description">Itineraries, budgets, and local insights.</div>
+					<div class="bot-features">
+						<span class="feature-tag">🗺️ Trips</span><span class="feature-tag">💰 Budgets</span><span class="feature-tag">💡 Tips</span>
+					</div>
+					<a class="bot-link" href="travel.html">Open →</a>
+				</div>
+
+				<!-- FixIt -->
+				<div class="bot-card">
+					<div class="bot-icon"><span style="font-size:48px">🛠️</span></div>
+					<div class="bot-title">FixIt Pro</div>
+					<div class="bot-description">DIY repair guidance, tools, and safety steps.</div>
+					<div class="bot-features">
+						<span class="feature-tag">📋 Guides</span><span class="feature-tag">🔧 Tools</span><span class="feature-tag">⚠️ Safety</span>
+					</div>
+					<a class="bot-link" href="fixITbot.html">Open →</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer">
+		<div class="container">© 2025 Chatty – Explore different bot experiences</div>
+	</footer>
+
+	<script src="../assets/js/page-transitions.js"></script>
+	<script src="../assets/js/enhancements.js"></script>
+</body>
+</html> 

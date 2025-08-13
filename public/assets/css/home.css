@@ -1,40 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatty - 11 Free AI Models | Specialized Chatbots for Every Business</title>
-    
-    <!-- Enhanced Meta Tags -->
-    <meta name="description" content="Specialized AI chatbots built for different business needs. 6 unique bots powered by 11 cutting-edge AI models including Llama 4, DeepSeek R1, and Gemini 2.5 Pro - all free!">
-    <meta name="keywords" content="AI chatbot, specialized chatbots, free AI models, Llama 4, DeepSeek R1, Gemini 2.5 Pro, business AI, conversational AI, Chatty">
-    <meta name="author" content="Chatty">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-domain.com/">
-    <meta property="og:title" content="Chatty - Specialized AI Chatbots">
-    <meta property="og:description" content="6 specialized AI chatbots powered by 11 cutting-edge models. Perfect for e-commerce, education, travel, and more - all free!">
-    <meta property="og:image" content="https://your-domain.com/assets/images/og-image.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://your-domain.com/">
-    <meta property="twitter:title" content="Chatty - Specialized AI Chatbots">
-    <meta property="twitter:description" content="6 specialized AI chatbots powered by 11 cutting-edge models. Perfect for e-commerce, education, travel, and more - all free!">
-    <meta property="twitter:image" content="https://your-domain.com/assets/images/og-image.png">
-    
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/chatty-icon.svg">
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/images/chatty-icon.svg">
-    <link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/images/chatty-icon.svg">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="assets/css/icons.css" rel="stylesheet">
-    <link href="assets/css/home.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Base */
+html, body { -webkit-user-select:auto; -moz-user-select:auto; -ms-user-select:auto; user-select:auto; -webkit-touch-callout:none; -webkit-tap-highlight-color:transparent; scroll-behavior:smooth; }
+*, *::before, *::after { box-sizing:border-box; }
+:root { --primary-gradient: linear-gradient(135deg,#667eea 0%,#764ba2 100%); --secondary-gradient: linear-gradient(135deg,#f093fb 0%,#f5576c 100%); --accent-gradient: linear-gradient(135deg,#4facfe 0%,#00f2fe 100%); --purple-glow: linear-gradient(135deg,#8b5cf6 0%,#a855f7 50%,#c084fc 100%); --dark-bg:#0a0a0f; --darker-bg:#050508; --text-primary:#fff; --text-secondary:#a0a0a0; --text-muted:#666; --border-color:rgba(255,255,255,0.1); --glass-bg:rgba(255,255,255,0.1); --glass-border:rgba(255,255,255,0.2); }
+body { font-family:'Inter',sans-serif; background:var(--dark-bg); color:var(--text-primary); line-height:1.6; overflow-x:hidden; }
+a,button,.btn,.nav-link,.burger-menu,.back-btn,.bot-card { cursor:pointer; }
+input,textarea,[contenteditable="true"] { user-select:text; cursor:text; }
+.container { max-width:1200px; margin:0 auto; padding:0 2rem; }
+
+/* Hero */
+.hero { min-height:100vh; position:relative; display:flex; flex-direction:column; overflow:hidden; padding-top:100px; }
+.hero-background { position:absolute; inset:0; z-index:0; }
+.hero-background::before { content:""; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size:40px 40px; opacity:.15; pointer-events:none; mix-blend-mode:overlay; }
+.gradient-orb { position:absolute; border-radius:50%; filter:blur(100px); opacity:.6; animation:float 8s ease-in-out infinite; }
+.orb-1{ width:360px;height:360px;background:var(--primary-gradient); top:-220px; left:-220px; animation-delay:0s; }
+.orb-2{ width:260px;height:260px;background:var(--secondary-gradient); top:55%; right:-130px; animation-delay:2s; }
+.orb-3{ width:200px;height:200px;background:var(--accent-gradient); bottom:-120px; left:25%; animation-delay:4s; }
+@keyframes float{ 0%,100%{ transform:translateY(0) rotate(0) } 50%{ transform:translateY(-20px) rotate(5deg) } }
+
+/* Nav */
+.nav{ position:fixed; top:0; left:0; right:0; z-index:100; background:transparent; backdrop-filter:none; border-bottom:1px solid transparent; transition:all .35s ease; padding:1.25rem 0; }
+.nav.shrink{ top:1rem; left:50%; right:auto; transform:translateX(-50%); width:min(92%,860px); padding:.4rem 0; background:rgba(10,10,15,.85); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.08); border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,.35); }
+.nav-content{ display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; padding:0 3rem; }
+.nav.scrolled .nav-content .logo img{ width:32px !important; height:32px !important; }
+.nav.scrolled{ background:rgba(10,10,15,.85); backdrop-filter:blur(20px); border-bottom:1px solid rgba(255,255,255,.08); padding:1rem 0; box-shadow:0 8px 32px rgba(102,126,234,.15); }
+.burger-menu{ display:none; flex-direction:column; cursor:pointer; padding:.5rem; border-radius:8px; transition:all .3s ease; }
+.burger-menu:hover{ background:rgba(255,255,255,.1); }
+.burger-line{ width:25px; height:3px; background:var(--text-primary); margin:3px 0; transition:.3s; border-radius:2px; }
+.logo{ display:flex; align-items:center; gap:.5rem; font-size:1.375rem; font-weight:700; padding:.25rem .5rem; border-radius:8px; background:transparent; border:none; }
+.logo img{ filter:none; }
+.logo-glow{ display:inline-flex; position:relative; border-radius:12px; }
+.logo-glow::before{ content:""; position:absolute; inset:-8px; border-radius:16px; background:radial-gradient(60% 60% at 50% 50%, rgba(139,92,246,.35), rgba(139,92,246,0) 70%); filter:blur(10px); pointer-events:none; }
+.logo-text{ background:var(--primary-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:600; }
+
+/* Buttons */
+.btn{ display:inline-flex; align-items:center; justify-content:center; padding:1rem 2rem; border-radius:12px; font-weight:600; text-decoration:none; transition:all .3s ease; border:none; cursor:pointer; font-size:1rem; }
+.btn-primary{ background:var(--primary-gradient); color:#fff; box-shadow:0 8px 24px rgba(102,126,234,.25); }
+.btn-secondary{ background:rgba(255,255,255,.06); color:var(--text-primary); border:1px solid var(--glass-border); backdrop-filter:blur(8px); }
+
+/* Featured section */
+.featured-bot{ padding:4rem 0; position:relative; }
+.featured-wrap{ display:grid; grid-template-columns:1.1fr .9fr; gap:2rem; align-items:center; width:min(100%,1040px); margin:0 auto; }
+.featured-actions{ display:flex; gap:.75rem; flex-wrap:wrap; }
+.featured-actions .btn{ padding:.9rem 1.25rem; }
+.featured-actions::after{ content:""; display:block; height:3px; width:160px; margin-top:.5rem; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:2px; opacity:.6; }
+.featured-card{ background:var(--glass-bg); border:1px solid var(--glass-border); border-radius:20px; padding:1.25rem; backdrop-filter:blur(10px); position:relative; overflow:hidden; max-width:520px; min-height:320px; }
+.featured-card .status-badge{ position:absolute; top:1rem; right:1rem; }
+.featured-card .bot-content{ position:relative; z-index:2; }
+.featured-card .bot-preview{ position:absolute; inset:0; background:rgba(255,255,255,.98); border-radius:20px; padding:1.5rem; opacity:0; transform:translateY(20px); transition:all .5s ease; z-index:3; display:flex; flex-direction:column; }
+.featured-card:hover .bot-preview{ opacity:1; transform:translateY(0); }
+.featured-mini{ flex:1; display:flex; flex-direction:column; gap:.5rem; max-height:300px; overflow:auto; }
+.featured-mini .row{ display:flex; gap:.5rem; opacity:0; transform:translateY(6px); transition:opacity .3s ease, transform .3s ease; }
+.featured-mini .row.show{ opacity:1; transform:none; }
+.featured-mini .row.user{ flex-direction:row-reverse; }
+.featured-mini .bubble{ background:#fff; color:#121013; padding:.6rem .9rem; border-radius:12px; max-width:70%; font-size:.9rem; border:1px solid rgba(0,0,0,.1); }
+.featured-mini .row.user .bubble{ background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; border:none; }
+
+/* Snap & reveal */
+.snap-container{ scroll-snap-type:y proximity; }
+.snap-section{ scroll-snap-align:start; min-height:95vh; display:block; }
+.reveal{ opacity:0; transform:translateY(20px); transition:opacity .45s ease, transform .45s ease; }
+.reveal.in-view{ opacity:1; transform:none; }
+
+/* Responsive */
+@media (max-width:1024px){ .featured-wrap{ grid-template-columns: 1fr; } }
+@media (max-width:768px){ .container{ padding:0 1rem; } .nav-content{ padding:0 2rem; } .nav.shrink .nav-content{ padding:0 1.25rem; } .burger-menu{ display:flex; } }
+@media (max-width:480px){ .container{ padding:0 .75rem; } } 
+
+        /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         /* Selection and cursor rules - default to selectable */
         html, body {
@@ -1406,391 +1440,3 @@
                 display: none;
             }
         }
-    </style>
-</head>
-<body class="snap-container">
-    <header class="nav">
-        <div class="nav-content">
-            <div class="logo">
-                <span class="logo-glow">
-                    <img src="assets/images/chatty-icon.svg" alt="Chatty Logo" width="40" height="40">
-                </span>
-                <span class="logo-text">Chatty</span>
-            </div>
-            <nav class="nav-links">
-                <a href="bots/index.html" class="nav-link">Bots</a>
-                <a href="#models" class="nav-link">Models</a>
-                <a href="analytics.html" class="nav-link">Analytics</a>
-            </nav>
-            <div class="burger-menu" id="burger-menu">
-                <div class="burger-line"></div>
-                <div class="burger-line"></div>
-                <div class="burger-line"></div>
-            </div>
-        </div>
-    </header>
-    <!-- Floating Actions -->
-    <div class="floating-actions">
-        <a href="https://github.com/Lochy2000/chatbot-v1" target="_blank" class="github-button">
-            <svg class="github-icon" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            <span>View on GitHub</span>
-        </a>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero snap-section reveal" style="min-height:100vh;">
-        <div class="hero-background">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
-        </div>
-        
-        <div class="container">
-            
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Explore Different Types of 
-                    <span class="gradient-text">AI Chatbots</span>
-                </h1>
-                <p class="hero-subtitle" id="hero-typing" aria-live="polite"></p>
-                <div class="hero-cta">
-                    <a href="#bots" class="btn btn-primary">Try the Bots</a>
-                    <a href="#about" class="btn btn-secondary">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-overlay" id="mobile-overlay"></div>
-    <div class="mobile-menu" id="mobile-menu">
-        <div class="mobile-menu-header">
-            <div class="logo">
-                <img src="assets/images/bot.png" alt="Bot Playground" style="width: 32px; height: 32px;">
-                <span>Menu</span>
-            </div>
-        </div>
-        <nav class="mobile-nav-links">
-            <a href="#bots" class="mobile-nav-link">🤖 Explore Bots</a>
-            <a href="#models" class="mobile-nav-link">⚡ AI Models</a>
-            <a href="analytics.html" class="mobile-nav-link">📊 Analytics</a>
-            <a href="icon-gallery.html" class="mobile-nav-link">🎨 Icon Gallery</a>
-            <a href="#about" class="mobile-nav-link">ℹ️ About</a>
-        </nav>
-    </div>
-
-    <!-- Bot Preview Section -->
-    <section id="bots" class="featured-bot snap-section reveal">
-        <div class="container">
-            <div class="featured-wrap">
-                <div class="featured-copy">
-                    <h2>Preview a Specialized Bot</h2>
-                    <p>Try a live example right here, then explore the full catalog of specialized chatbots.</p>
-                    <div class="featured-actions">
-                        <a href="bots/ecommerce.html" class="btn btn-primary">Open Shopping Assistant</a>
-                        <a href="bots/index.html" class="btn btn-secondary">Browse All Bots</a>
-                    </div>
-                </div>
-                <div class="featured-card bot-card">
-                    <div class="status-badge badge-popular">🔥 Popular</div>
-                    <div class="bot-content">
-                        <div class="bot-icon">
-                            <img src="assets/images/icons/database-storage.png" alt="Shopping" style="width: 48px; height: 48px;">
-                        </div>
-                        <h3 class="bot-title">Shopping Assistant</h3>
-                        <p class="bot-description">Specialized for e-commerce queries, product recommendations, and order support</p>
-                        <div class="bot-features">
-                            <span class="feature-tag tag-search">🔍 Product Search</span>
-                            <span class="feature-tag tag-tracking">📦 Order Tracking</span>
-                            <span class="feature-tag tag-support">↩️ Returns</span>
-                        </div>
-                        <a href="bots/ecommerce.html" class="bot-link">Try Shopping Bot →</a>
-                    </div>
-                    <div class="bot-preview">
-                        <div class="preview-header">
-                            <div class="preview-icon">🛍️</div>
-                            <div class="preview-title">Shopping Assistant Demo</div>
-                        </div>
-                        <div class="featured-mini">
-                            <div class="row bot"><div class="bubble">Hi! I can help you find products, track orders, and handle returns.</div></div>
-                            <div class="row user"><div class="bubble">Show wireless headphones under $100</div></div>
-                            <div class="row bot"><div class="bubble">Here are 3 top options under $100. Want ANC or longest battery life?</div></div>
-                        </div>
-                        <a href="bots/ecommerce.html" class="try-button">Try Shopping Assistant</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="section-connector"></div>
-
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 class="section-title">Why Specialized Chatbots?</h2>
-                    <p class="about-description">
-                        Most websites use generic chatbots that try to handle everything. 
-                        But different types of businesses have different visitor needs.
-                    </p>
-                    <div class="about-points">
-                        <div class="point">
-                            <div class="point-icon">🎯</div>
-                            <div class="point-content">
-                                <h4>Context Understanding</h4>
-                                <p>Specialized bots understand their domain better</p>
-                            </div>
-                        </div>
-                        <div class="point">
-                            <div class="point-icon">💡</div>
-                            <div class="point-content">
-                                <h4>Better User Experience</h4>
-                                <p>Users get relevant answers faster</p>
-                            </div>
-                        </div>
-                        <div class="point">
-                            <div class="point-icon">⚙️</div>
-                            <div class="point-content">
-                                <h4>Purpose-Built Design</h4>
-                                <p>Interface matches the intended use case</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual">
-                    <div class="demo-chat">
-                        <div class="demo-message bot">
-                            <div class="message-avatar">🤖</div>
-                            <div class="message-content">
-                                How can I help with your shopping today?
-                            </div>
-                        </div>
-                        <div class="demo-message user">
-                            <div class="message-content">
-                                Looking for winter jackets
-                            </div>
-                        </div>
-                        <div class="demo-message bot">
-                            <div class="message-avatar">🛍️</div>
-                            <div class="message-content">
-                                Great! I can show you our winter collection. What's your preferred style and budget range?
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <div class="logo">
-                        <img src="assets/images/chatty-icon.svg" alt="Chatty" style="width: 32px; height: 32px;">
-                        <span class="logo-text">Chatty</span>
-                    </div>
-                    <p>Specialized AI chatbots powered by 11 cutting-edge AI models</p>
-                </div>
-                <div class="footer-links">
-                    <div class="link-group">
-                        <h4>Bots</h4>
-                        <a href="bots/ecommerce.html">Shopping Assistant</a>
-                        <a href="bots/education.html">Academic Guide</a>
-                        <a href="bots/minimal.html">Quick Helper</a>
-                        <a href="bots/foundation.html">Adaptive Assistant</a>
-                        <a href="bots/travel.html">TravelBot</a>
-                        <a href="bots/fixITbot.html">FixIt Pro</a>
-                    </div>
-                    <div class="link-group">
-                        <h4>About</h4>
-                        <a href="#about">The Project</a>
-                        <a href="https://github.com/Lochy2000/chatbot-v1">GitHub</a>
-                        <a href="https://openrouter.ai">OpenRouter</a>
-                        <a href="https://vercel.com">Vercel</a>
-                    </div>
-                    <div class="link-group">
-                        <h4>Resources</h4>
-                        <a href="#models">AI Models</a>
-                        <a href="icon-gallery.html">Icon Gallery</a>
-                        <a href="https://gemini.google.com">Gemini AI</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Bot Playground. Powered by 11 free AI models including Llama 4, DeepSeek R1, and Gemini 2.5 Pro.</p>
-            </div>
-        </div>
-    </footer>
-
-
-                orb.style.animationDelay = `${index * 2}s`;
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-
-            const animateElements = document.querySelectorAll('.bot-card, .point, .section-title');
-            animateElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'all 0.6s ease';
-                observer.observe(el);
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            window.addEventListener('scroll', () => {
-                const nav = document.querySelector('.nav');
-                if (window.scrollY > 100) {
-                    nav.style.background = 'rgba(10, 10, 15, 0.9)';
-                    nav.style.backdropFilter = 'blur(10px)';
-                    nav.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
-                } else {
-                    nav.style.background = 'transparent';
-                    nav.style.backdropFilter = 'none';
-                    nav.style.borderBottom = 'none';
-                }
-            });
-        }
-
-        function initializeBotCards() {
-            const botCards = document.querySelectorAll('.bot-card');
-            
-            botCards.forEach(card => {
-                // Enhanced hover effects
-                card.addEventListener('mouseenter', () => {
-                    card.style.transform = 'translateY(-8px) scale(1.02)';
-                    // Start demo message animations
-                    const demoMessages = card.querySelectorAll('.demo-message');
-                    demoMessages.forEach((msg, index) => {
-                        setTimeout(() => {
-                            msg.style.opacity = '1';
-                            msg.style.transform = 'translateY(0)';
-                        }, index * 400 + 200);
-                    });
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'translateY(0) scale(1)';
-                    // Reset demo message animations
-                    const demoMessages = card.querySelectorAll('.demo-message');
-                    demoMessages.forEach(msg => {
-                        msg.style.opacity = '0';
-                        msg.style.transform = 'translateY(20px)';
-                    });
-                });
-
-                // Mobile tap support for previews
-                card.addEventListener('click', (e) => {
-                    // Don't trigger preview if clicking on links or buttons
-                    if (e.target.classList.contains('bot-link') || 
-                        e.target.classList.contains('try-button') ||
-                        e.target.closest('.bot-link') || 
-                        e.target.closest('.try-button')) {
-                        return;
-                    }
-
-                    // On mobile, toggle preview on tap
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        card.classList.toggle('mobile-preview');
-                        
-                        // Animate demo messages for mobile
-                        if (card.classList.contains('mobile-preview')) {
-                            const demoMessages = card.querySelectorAll('.demo-message');
-                            demoMessages.forEach((msg, index) => {
-                                setTimeout(() => {
-                                    msg.style.opacity = '1';
-                                    msg.style.transform = 'translateY(0)';
-                                }, index * 300);
-                            });
-                        } else {
-                            const demoMessages = card.querySelectorAll('.demo-message');
-                            demoMessages.forEach(msg => {
-                                msg.style.opacity = '0';
-                                msg.style.transform = 'translateY(20px)';
-                            });
-                        }
-                    } else {
-                        // Desktop behavior - go to bot page
-                        const link = card.querySelector('.bot-link');
-                        if (link) {
-                            window.location.href = link.href;
-                        }
-                    }
-                });
-
-                // Initialize demo message states
-                const demoMessages = card.querySelectorAll('.demo-message');
-                demoMessages.forEach(msg => {
-                    msg.style.opacity = '0';
-                    msg.style.transform = 'translateY(20px)';
-                    msg.style.transition = 'all 0.6s ease';
-                });
-            });
-
-            // Close mobile previews when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.bot-card')) {
-                    const mobileCards = document.querySelectorAll('.bot-card.mobile-preview');
-                    mobileCards.forEach(card => {
-                        card.classList.remove('mobile-preview');
-                        const demoMessages = card.querySelectorAll('.demo-message');
-                        demoMessages.forEach(msg => {
-                            msg.style.opacity = '0';
-                            msg.style.transform = 'translateY(20px)';
-                        });
-                    });
-                }
-
-            // Pause animation on hover
-            const modelsTrack = document.querySelector('.models-track');
-            if (modelsTrack) {
-                modelsTrack.addEventListener('mouseenter', () => {
-                    modelsTrack.style.animationPlayState = 'paused';
-                });
-                
-                modelsTrack.addEventListener('mouseleave', () => {
-                    modelsTrack.style.animationPlayState = 'running';
-                });
-            }
-            
-            // Add click tracking for model badges
-            const modelBadges = document.querySelectorAll('.model-badge');
-            modelBadges.forEach(badge => {
-                badge.addEventListener('click', () => {
-                    console.log('Model clicked:', badge.textContent.trim());
-                    // Could add analytics or navigation here
-                });
-            });
-    <!-- Enhanced UI JavaScript -->
-    <script src="assets/js/page-transitions.js"></script>
-    <script src="assets/js/enhancements.js"></script>
-    <script src="assets/js/theme-switcher.js"></script>
-    <script src="assets/js/home.js"></script>
-</body>
-</html>

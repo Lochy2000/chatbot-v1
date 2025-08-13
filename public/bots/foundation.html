@@ -86,16 +86,16 @@
         .chat-orb {
             position: relative;
             z-index: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
             backdrop-filter: blur(12px);
-            width: 90%;
+            width: 92%;
             max-width: 480px;
-            height: 90vh;
+            height: 92vh;
             display: flex;
             flex-direction: column;
-            padding: 1rem;
-            box-shadow: 0 0 20px rgba(59,130,246,0.4);
+            padding: 1.25rem;
+            box-shadow: 0 16px 36px rgba(59,130,246,0.25);
         }
 
         h1 {
@@ -304,6 +304,7 @@
         </div>
     </div>
 
+    <script src="../assets/js/page-transitions.js"></script>
     <script>
         const chatBox = document.getElementById("chat-box");
         const userInput = document.getElementById("user-input");
@@ -439,5 +440,6 @@
         // Auto-focus input
         userInput.focus();
     </script>
+    <script src="../assets/js/page-transitions.js"></script>
 </body>
 </html>

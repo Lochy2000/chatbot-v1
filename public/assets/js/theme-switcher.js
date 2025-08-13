@@ -26,8 +26,9 @@ class ThemeSwitcher {
         themeToggle.innerHTML = this.currentTheme === 'dark' ? '🌙' : '☀️';
         themeToggle.title = `Switch to ${this.currentTheme === 'dark' ? 'light' : 'dark'} theme`;
         
-        // Add directly to body
-        document.body.appendChild(themeToggle);
+        // Add to floating actions container (creates one if missing)
+        const container = document.querySelector('.floating-actions') || this.createFloatingActionsContainer();
+        container.appendChild(themeToggle);
 
         this.addThemeToggleStyles();
     }
@@ -35,24 +36,20 @@ class ThemeSwitcher {
     addThemeToggleStyles() {
         const styles = `
             .theme-toggle {
-                position: fixed;
-                bottom: 2rem;
-                right: 12rem;
-                z-index: 1000;
                 background: rgba(255, 255, 255, 0.1);
                 border: 1px solid rgba(255, 255, 255, 0.2);
                 border-radius: 50%;
-                padding: 0.75rem;
+                padding: 0.6rem;
                 cursor: pointer;
                 transition: all 0.3s ease;
                 backdrop-filter: blur(10px);
-                width: 50px;
-                height: 50px;
+                width: 44px;
+                height: 44px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             .theme-toggle:hover {
@@ -76,27 +73,6 @@ class ThemeSwitcher {
             /* Smooth theme transitions */
             *, *::before, *::after {
                 transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            }
-
-            @media (max-width: 768px) {
-                .theme-toggle {
-                    bottom: 1rem;
-                    left: 1rem;
-                    right: auto;
-                    width: 45px;
-                    height: 45px;
-                    font-size: 1rem;
-                }
-            }
-
-            @media (max-width: 480px) {
-                .theme-toggle {
-                    bottom: 0.75rem;
-                    left: 0.75rem;
-                    width: 42px;
-                    height: 42px;
-                    font-size: 0.9rem;
-                }
             }
         `;
 
@@ -142,6 +118,13 @@ class ThemeSwitcher {
             themeToggle.innerHTML = theme === 'dark' ? '🌙' : '☀️';
             themeToggle.title = `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`;
         }
+    }
+
+    createFloatingActionsContainer() {
+        const container = document.createElement('div');
+        container.className = 'floating-actions';
+        document.body.appendChild(container);
+        return container;
     }
 }
 

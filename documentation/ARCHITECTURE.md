@@ -43,13 +43,13 @@ public/
 │   └── 📁 images/
 │       └── 📁 icons/       # UI icons (25+ 3D icons)
 └── 📁 bots/               # Individual bot interfaces
-    ├── 🛍️ ecommerce.html   # E-commerce chatbot
-    ├── 🎓 education.html   # Educational chatbot
-    ├── 💬 minimal.html     # Minimal interface bot
-    └── ⚡ foundation.html  # Adaptive personality bot
+    ├── ecommerce.html   # E-commerce chatbot
+    ├── education.html   # Educational chatbot
+    ├── minimal.html     # Minimal interface bot
+    └── foundation.html  # Adaptive personality bot
 ```
 
-## 🤖 **Bot Implementation Details**
+## **Bot Implementation Details**
 
 ### **1. Shopping Assistant (`ecommerce.html`)**
 - **Purpose**: E-commerce focused interactions

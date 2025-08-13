@@ -22,20 +22,20 @@
     filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
 }
 
-/* Logo styling */
+/* Logo styling - simplified to match cleaner header */
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 }
 
 .logo img {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-    transition: all 0.3s ease;
+	filter: none;
+	transition: transform 0.3s ease;
 }
 
 .logo:hover img {
-    transform: rotate(5deg) scale(1.05);
+	transform: none;
 }
 
 /* Icon utilities */

@@ -6,6 +6,7 @@
 .model-dropdown {
     position: relative;
     width: 100%;
+    display: none;
 }
 
 .model-select {
