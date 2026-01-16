@@ -8,7 +8,8 @@
 
 > **Specialized AI chatbots designed for different business needs. Experience how purpose-built chatbots work better than generic ones with 6 unique bots powered by 11 cutting-edge AI models.**
 
-![Chatty Screenshot](https://github.com/user-attachments/assets/3f9d7f4d-6e1c-48f8-95fa-62b4101ba0d1)
+<img width="1881" height="873" alt="image" src="https://github.com/user-attachments/assets/c4158ee1-970b-403d-b768-990f86bfba13" />
+
 
 ---
 
